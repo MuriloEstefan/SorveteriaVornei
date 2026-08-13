@@ -3,6 +3,7 @@ interface ItemQuantidadeProps {
     quantidade: number;
     tipo: "sorvete" | "acompanhamento";
     podeAumentar: boolean;
+    disponivel: boolean; 
     aumentar: (nome: string, tipo: "sorvete" | "acompanhamento") => void;
     diminuir: (nome: string) => void;
 }
@@ -12,11 +13,13 @@ export default function ItemQuantidade({
     quantidade,
     tipo, 
     podeAumentar,
+    disponivel,
     aumentar,
     diminuir,
 }: ItemQuantidadeProps) {
     const selecionado = quantidade > 0;
-    const bloqueado = !podeAumentar && !selecionado;
+    const bloqueadoPorLimite = !podeAumentar && !selecionado;
+    const bloqueado = bloqueadoPorLimite || !disponivel;
 
     return(
         <div
@@ -35,31 +38,22 @@ export default function ItemQuantidade({
             }
             `}
         >
-            <span className={`text-sm ${
-                selecionado
-                    ? "text-white font-medium"
-                    : bloqueado
-                        ? "text-white/30"
-                        : "text-white/90"
+            <span className={`text-sm flex items-center gap-2 ${
+                selecionado ? "text-white font-medium" : bloqueado ? "text-white/30" : "text-white/90"
             }`}>
                 {nome}
+                {!disponivel && (
+                    <span className="text-[10px] bg-red-500/20 text-red-300 px-1.5 py-0.5 rounded-full font-semibold">
+                        Esgotado
+                    </span>
+                )}
             </span>
 
             <div className="flex items-center gap-3">
                 <button
                     onClick={() => diminuir(nome)}
                     disabled={quantidade === 0}
-                    className="
-                        w-10 h-10
-                        flex items-center justify-center
-                        rounded-full
-                        bg-white/10 hover:bg-white/20
-                        active:scale-90
-                        disabled:opacity-30 disabled:hover:bg-white/10
-                        text-white text-lg font-semibold
-                        transition
-                        cursor-pointer disabled:cursor-not-allowed
-                    "
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 active:scale-90 disabled:opacity-30 disabled:hover:bg-white/10 text-white text-lg font-semibold transition cursor-pointer disabled:cursor-not-allowed"
                 >
                     −
                 </button>
@@ -70,18 +64,8 @@ export default function ItemQuantidade({
 
                 <button
                     onClick={() => aumentar(nome, tipo)}
-                    disabled={!podeAumentar}
-                    className="
-                        w-10 h-10
-                        flex items-center justify-center
-                        rounded-full
-                        bg-purple-500/20 hover:bg-purple-500/30
-                        active:scale-90
-                        disabled:opacity-30 disabled:hover:bg-purple-500/20
-                        text-purple-200 text-lg font-semibold
-                        transition
-                        cursor-pointer disabled:cursor-not-allowed
-                    "
+                    disabled={!podeAumentar || !disponivel}
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-purple-500/20 hover:bg-purple-500/30 active:scale-90 disabled:opacity-30 disabled:hover:bg-purple-500/20 text-purple-200 text-lg font-semibold transition cursor-pointer disabled:cursor-not-allowed"
                 >
                     +
                 </button>

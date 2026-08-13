@@ -8,7 +8,7 @@ export default function Hero() {
             {/* Fundo com imagem escurecida */}
             <div className="absolute inset-0">
                 <Image
-                    src="/imagens/CopoVorneiMenor.jpeg"
+                    src="/imagens/Copo/CopoVorneiMenor.jpeg"
                     alt="Banner Vornei"
                     fill
                     priority

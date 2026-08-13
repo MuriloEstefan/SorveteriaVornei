@@ -6,14 +6,18 @@ export interface Categoria {
 export const categorias: Categoria[] = [
     {
         nome: "Sorvete + Açaí",
-        descricao: "Misture sabores íncriveis",
+        descricao: "Misture sabores íncriveis!",
     },
     {
         nome: "Milkshakes",
-        descricao: "Milkshakes cremosos e especiais",
+        descricao: "Milkshakes cremosos e especiais!",
     },
     {
         nome: "Sobremesas",
-        descricao: "Fondue, brownies e outras delícias"
+        descricao: "Fondue, brownies e outras delícias!"
+    },
+    {
+        nome: "Açaí no Copo",
+        descricao: "Açaí premium, cremoso e saboroso!"
     }
 ];

@@ -26,7 +26,7 @@ export default function Sidebar() {
     icon: DollarSign,
   },
   {
-    nome: "Produtos",
+    nome: "Produtos & Ingredientes",
     href: "/admin/produtos",
     icon: IceCream2,
   },

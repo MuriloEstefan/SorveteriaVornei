@@ -7,6 +7,7 @@ import { buscarConfigSobremesa } from "../../data/sobremesasConfig";
 import { useMontagemSobremesa } from "../../hooks/useMontagemSobremesa";
 import GrupoOpcoes from "../GrupoOpcoes";
 import BotaoAdicionarCarrinho from "../BotaoAdicionarAoCarrinho";
+import { useIngredientesDisponiveis } from "../../hooks/useIngredientesDisponiveis";
 
 interface ModalSobremesaProps {
     produto: Produto | null;
@@ -19,6 +20,8 @@ export default function ModalSobremesa({
     fechar,
     adicionarAoCarrinho,
 }: ModalSobremesaProps) {
+    const { disponibilidadePorNome } = useIngredientesDisponiveis();
+
     const config = produto ? buscarConfigSobremesa(produto.nome) : null;
 
     const {
@@ -41,12 +44,26 @@ export default function ModalSobremesa({
     const tentarAdicionar = () => {
         if (config) {
             for (const grupo of config.grupos) {
+                // Checagem 1: min/obrigatório do grupo
                 if (grupo.obrigatorio && totalPorGrupo(grupo) < grupo.min) {
                     toast.error(
                         `Escolha ${grupo.min > 1 ? `${grupo.min} opções` : "1 opção"} em "${grupo.titulo}".`,
                         { position: "top-center", autoClose: 2500 }
                     );
                     return;
+                }
+
+                // Checagem 2: nenhuma opção selecionada pode estar esgotada
+                for (const opcao of grupo.opcoes) {
+                    const selecionado = (quantidades[opcao.nome] || 0) > 0;
+                    const disponivel = disponibilidadePorNome[opcao.nome] ?? true;
+                    if (selecionado && !disponivel) {
+                        toast.error(`"${opcao.nome}" esgotou. Escolha outra opção.`, {
+                            position: "top-center",
+                            autoClose: 2500,
+                        });
+                        return;
+                    }
                 }
             }
         }
@@ -93,6 +110,7 @@ export default function ModalSobremesa({
                             grupo={grupo}
                             quantidades={quantidades}
                             totalSelecionado={totalPorGrupo(grupo)}
+                            disponibilidadePorNome={disponibilidadePorNome}
                             selecionarUnico={selecionarUnico}
                             aumentar={aumentar}
                             diminuir={diminuir}

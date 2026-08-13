@@ -27,16 +27,16 @@ export const sobremesasConfig: ConfigSobremesa[] = [
                 titulo: "Calda",
                 obrigatorio: true,
                 min: 1,
-                max: 2, // 👈 mudou (era 1) — agora permite repetir/2 caldas
+                max: 2, 
                 opcoes: [
-                    { nome: "Chocolate trufado ao leite" },
-                    { nome: "Chocolate trufado branco" },
-                    { nome: "Creme de avelã" },
-                    { nome: "Creme de leite Ninho" },
+                    { nome: "Chocolate Trufado ao Leite" },
+                    { nome: "Chocolate Trufado Branco" },
+                    { nome: "Creme de Avelã" },
+                    { nome: "Creme de Leite Ninho" },
                     { nome: "Creme de Ovomaltine" },
                     { nome: "Creme de Ferrero Rocher" },
-                    { nome: "Creme de cookies branco" },
-                    { nome: "Creme de paçoquita" },
+                    { nome: "Creme de Cookies Branco" },
+                    { nome: "Creme de Paçoca" },
                     { nome: "Creme de Kinder Bueno" },
                 ],
             },
@@ -75,7 +75,7 @@ export const sobremesasConfig: ConfigSobremesa[] = [
     {
         nomeProduto: "Fondue no Copo de 500ml",
         grupos: [
-            { chave: "calda", titulo: "Calda", obrigatorio: true, min: 2, max: 2, opcoes: caldasCopo }, // 👈 já era max:2, já funciona como contador
+            { chave: "calda", titulo: "Calda", obrigatorio: true, min: 2, max: 2, opcoes: caldasCopo }, 
             { chave: "frutas", titulo: "Frutas", obrigatorio: true, min: 1, max: 4, opcoes: frutasCopo },
         ],
     },
@@ -103,9 +103,9 @@ export const sobremesasConfig: ConfigSobremesa[] = [
                 min: 1,
                 max: 1,
                 opcoes: [
-                    { nome: "Creme de avelã" },
-                    { nome: "Chocolate ao leite" },
-                    { nome: "Creme de leite Ninho" },
+                    { nome: "Creme de Avelã" },
+                    { nome: "Chocolate ao Leite" },
+                    { nome: "Creme de Leite Ninho" },
                 ],
             },
         ],

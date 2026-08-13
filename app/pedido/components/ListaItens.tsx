@@ -1,20 +1,13 @@
-
-{/**Este componente é responsável por mapear os sabores de acai/sorvetes e os acompanhamentos (itens dos produtos) */}
 import ItemQuantidade from "../../../components/ItemQuantidade";
 
 interface ListaItensProps {
     titulo: string;
     lista: string[];
     tipo: "sorvete" | "acompanhamento";
-
     quantidades: Record<string, number>;
     maxItens: number;
-
-    aumentar: (
-        nome: string,
-        tipo: "sorvete" | "acompanhamento"
-    ) => void;
-
+    disponibilidadePorNome: Record<string, boolean>; // 👈 novo
+    aumentar: (nome: string, tipo: "sorvete" | "acompanhamento") => void;
     diminuir: (nome: string) => void;
 }
 
@@ -24,6 +17,7 @@ export default function ListaItens({
     tipo,
     quantidades,
     maxItens,
+    disponibilidadePorNome,
     aumentar,
     diminuir,
 }: ListaItensProps) {
@@ -36,9 +30,7 @@ export default function ListaItens({
     return (
         <div className="mt-10 space-y-3">
             <div className="flex items-center justify-between px-1 mb-2">
-                <h2 className="text-white font-semibold text-base">
-                    {titulo}
-                </h2>
+                <h2 className="text-white font-semibold text-base">{titulo}</h2>
                 <span className="text-white/40 text-xs font-semibold">
                     {totalSelecionado}/{maxItens}
                 </span>
@@ -53,6 +45,7 @@ export default function ListaItens({
                     quantidade={quantidades[item] || 0}
                     tipo={tipo}
                     podeAumentar={podeAumentar}
+                    disponivel={disponibilidadePorNome[item] ?? true} // 👈 assume disponível se não achar (fallback seguro)
                     aumentar={aumentar}
                     diminuir={diminuir}
                 />

@@ -9,8 +9,11 @@ import { acompanhamentos } from "../../data/acompanhamentos";
 import ListaItens from "../ListaItens";
 import { useMontagemPedido } from "../../hooks/useMontagemPedido";
 import BotaoAdicionarCarrinho from "../BotaoAdicionarAoCarrinho";
+import { useIngredientesDisponiveis } from "../../hooks/useIngredientesDisponiveis";
 
 export default function ModalSorveteAcai({pedido, fechar, adicionarAoCarrinho}: Props) {
+    
+    const { disponibilidadePorNome } = useIngredientesDisponiveis();
 
     const {
         quantidades,
@@ -120,6 +123,7 @@ export default function ModalSorveteAcai({pedido, fechar, adicionarAoCarrinho}: 
                     tipo="sorvete"
                     quantidades={quantidades}
                     maxItens={pedido.maxSabores}
+                    disponibilidadePorNome={disponibilidadePorNome}
                     aumentar={aumentar}
                     diminuir={diminuir}
                 />
@@ -130,6 +134,7 @@ export default function ModalSorveteAcai({pedido, fechar, adicionarAoCarrinho}: 
                     tipo="acompanhamento"
                     quantidades={quantidades}
                     maxItens={pedido.maxAcompanhamentos}
+                    disponibilidadePorNome={disponibilidadePorNome}
                     aumentar={aumentar}
                     diminuir={diminuir}
                 />

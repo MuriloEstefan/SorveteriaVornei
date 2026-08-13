@@ -5,6 +5,7 @@ interface GrupoOpcoesProps {
     grupo: GrupoEscolha;
     quantidades: Record<string, number>;
     totalSelecionado: number;
+    disponibilidadePorNome: Record<string, boolean>;
     selecionarUnico: (grupoChave: string, nome: string) => void;
     aumentar: (grupoChave: string, nome: string) => void;
     diminuir: (nome: string) => void;
@@ -14,6 +15,7 @@ export default function GrupoOpcoes({
     grupo,
     quantidades,
     totalSelecionado,
+    disponibilidadePorNome,
     selecionarUnico,
     aumentar,
     diminuir,
@@ -45,28 +47,38 @@ export default function GrupoOpcoes({
             <div className="h-px bg-white/10" />
 
             {selecaoUnica ? (
-                // Grupo de escolha única (ex: Calda) — igual antes, botão de rádio
                 <div className="space-y-2">
                     {grupo.opcoes.map((opcao) => {
                         const selecionado = (quantidades[opcao.nome] || 0) > 0;
+                        const disponivel = disponibilidadePorNome[opcao.nome] ?? true;
+                        const bloqueado = !disponivel;
+
                         return (
                             <button
                                 key={opcao.nome}
-                                onClick={() => selecionarUnico(grupo.chave, opcao.nome)}
+                                onClick={() => !bloqueado && selecionarUnico(grupo.chave, opcao.nome)}
+                                disabled={bloqueado}
                                 className={`
                                     w-full flex items-center justify-between
-                                    px-4 py-3 rounded-2xl border transition text-left cursor-pointer
+                                    px-4 py-3 rounded-2xl border transition text-left
                                     ${
                                         selecionado
                                             ? "bg-purple-600/20 border-purple-500 text-white"
-                                            : "bg-[#2b2340] border-transparent text-white/90 hover:border-[#5b5470] hover:bg-[#3a2f5c]"
+                                            : bloqueado
+                                                ? "bg-[#2b2340]/50 border-transparent text-white/30 opacity-40 cursor-not-allowed"
+                                                : "bg-[#2b2340] border-transparent text-white/90 hover:border-[#5b5470] hover:bg-[#3a2f5c] cursor-pointer"
                                     }
                                 `}
                             >
-                                <span className="text-sm">
+                                <span className="text-sm flex items-center gap-2">
                                     {opcao.nome}
+                                    {!disponivel && (
+                                        <span className="text-[10px] bg-red-500/20 text-red-300 px-1.5 py-0.5 rounded-full font-semibold">
+                                            Esgotado
+                                        </span>
+                                    )}
                                     {opcao.precoAdicional ? (
-                                        <span className="text-green-400 text-xs font-semibold ml-2">
+                                        <span className="text-green-400 text-xs font-semibold">
                                             +R$ {opcao.precoAdicional.toFixed(2).replace(".", ",")}
                                         </span>
                                     ) : null}
@@ -84,12 +96,13 @@ export default function GrupoOpcoes({
                     })}
                 </div>
             ) : (
-                // Grupo com mais de 1 opção — contador +/-, permite repetir
                 <div className="space-y-2">
                     {grupo.opcoes.map((opcao) => {
                         const quantidade = quantidades[opcao.nome] || 0;
                         const selecionado = quantidade > 0;
-                        const podeAumentar = totalSelecionado < grupo.max;
+                        const disponivel = disponibilidadePorNome[opcao.nome] ?? true;
+                        const podeAumentar = totalSelecionado < grupo.max && disponivel;
+                        const bloqueado = !disponivel;
 
                         return (
                             <div
@@ -100,14 +113,21 @@ export default function GrupoOpcoes({
                                     ${
                                         selecionado
                                             ? "bg-[#3a2f5c] border-purple-500/40"
-                                            : "bg-[#2b2340] border-transparent"
+                                            : bloqueado
+                                                ? "bg-[#2b2340]/50 border-transparent opacity-40"
+                                                : "bg-[#2b2340] border-transparent"
                                     }
                                 `}
                             >
-                                <span className={`text-sm ${selecionado ? "text-white font-medium" : "text-white/90"}`}>
+                                <span className={`text-sm flex items-center gap-2 ${selecionado ? "text-white font-medium" : "text-white/90"}`}>
                                     {opcao.nome}
+                                    {!disponivel && (
+                                        <span className="text-[10px] bg-red-500/20 text-red-300 px-1.5 py-0.5 rounded-full font-semibold">
+                                            Esgotado
+                                        </span>
+                                    )}
                                     {opcao.precoAdicional ? (
-                                        <span className="text-green-400 text-xs font-semibold ml-2">
+                                        <span className="text-green-400 text-xs font-semibold">
                                             +R$ {opcao.precoAdicional.toFixed(2).replace(".", ",")} cada
                                         </span>
                                     ) : null}
@@ -117,13 +137,7 @@ export default function GrupoOpcoes({
                                     <button
                                         onClick={() => diminuir(opcao.nome)}
                                         disabled={quantidade === 0}
-                                        className="
-                                            w-9 h-9 flex items-center justify-center rounded-full
-                                            bg-white/10 hover:bg-white/20 active:scale-90
-                                            disabled:opacity-30 disabled:hover:bg-white/10
-                                            text-white text-lg font-semibold transition
-                                            cursor-pointer disabled:cursor-not-allowed
-                                        "
+                                        className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 active:scale-90 disabled:opacity-30 disabled:hover:bg-white/10 text-white text-lg font-semibold transition cursor-pointer disabled:cursor-not-allowed"
                                     >
                                         −
                                     </button>
@@ -135,13 +149,7 @@ export default function GrupoOpcoes({
                                     <button
                                         onClick={() => aumentar(grupo.chave, opcao.nome)}
                                         disabled={!podeAumentar}
-                                        className="
-                                            w-9 h-9 flex items-center justify-center rounded-full
-                                            bg-purple-500/20 hover:bg-purple-500/30 active:scale-90
-                                            disabled:opacity-30 disabled:hover:bg-purple-500/20
-                                            text-purple-200 text-lg font-semibold transition
-                                            cursor-pointer disabled:cursor-not-allowed
-                                        "
+                                        className="w-9 h-9 flex items-center justify-center rounded-full bg-purple-500/20 hover:bg-purple-500/30 active:scale-90 disabled:opacity-30 disabled:hover:bg-purple-500/20 text-purple-200 text-lg font-semibold transition cursor-pointer disabled:cursor-not-allowed"
                                     >
                                         +
                                     </button>

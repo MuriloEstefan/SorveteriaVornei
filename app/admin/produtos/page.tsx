@@ -1,46 +1,44 @@
 "use client";
 
-import { useProdutosAdmin } from "./hooks/useProdutosAdmin";
-import ProdutoCard from "./components/ProdutoCard";
+import { useState } from "react";
+import ProdutosView from "./components/ProdutosView";
+import IngredientesView from "./components/IngredientesView";
 
 export default function ProdutosPage() {
-    const { produtos, carregando, alternarDisponibilidade, alternarAtivo } =
-        useProdutosAdmin();
-
-    if (carregando) {
-        return <p className="text-white/40 p-6">Carregando produtos...</p>;
-    }
-
-    // Agrupa por categoria, tipo groupby do pandas
-    const porCategoria = produtos.reduce<Record<string, typeof produtos>>((acc, p) => {
-        if (!acc[p.categoria]) acc[p.categoria] = [];
-        acc[p.categoria].push(p);
-        return acc;
-    }, {});
+    const [abaSelecionada, setAbaSelecionada] = useState<"produtos" | "ingredientes">("produtos");
 
     return (
-        <div className="p-6 space-y-8">
-            <h1 className="text-white text-xl font-bold">Produtos</h1>
+        <div className="p-6">
+            <h1 className="text-white text-xl font-bold mb-6">Produtos</h1>
 
-            {Object.entries(porCategoria).map(([categoria, itens]) => (
-                <div key={categoria}>
-                    <h2 className="text-white/50 text-sm uppercase tracking-widest font-bold mb-3">
-                        {categoria}
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {itens.map((produto) => (
-                            <ProdutoCard
-                                key={produto.id}
-                                produto={produto}
-                                onToggleDisponivel={() =>
-                                    alternarDisponibilidade(produto.id, produto.disponivel)
-                                }
-                                onToggleAtivo={() => alternarAtivo(produto.id, produto.ativo)}
-                            />
-                        ))}
-                    </div>
-                </div>
-            ))}
+            {/* Abas */}
+            <div className="flex gap-2 mb-6 bg-white/5 rounded-xl p-1 w-fit">
+                <button
+                    onClick={() => setAbaSelecionada("produtos")}
+                    className={`px-5 py-2 rounded-lg text-sm font-semibold transition hover: cursor-pointer ${
+                        abaSelecionada === "produtos"
+                            ? "bg-violet-600 text-white"
+                            : "text-white/50 hover:text-white"
+                    }`}
+                >
+                    Produtos
+                </button>
+
+                <button
+                    onClick={() => setAbaSelecionada("ingredientes")}
+                    className={`px-5 py-2 rounded-lg text-sm font-semibold transition hover: cursor-pointer ${
+                        abaSelecionada === "ingredientes"
+                            ? "bg-violet-600 text-white"
+                            : "text-white/50 hover:text-white"
+                    }`}
+                >
+                    Ingredientes
+                </button>
+            </div>
+
+            {/* Conteúdo da aba selecionada */}
+            {abaSelecionada === "produtos" && <ProdutosView />}
+            {abaSelecionada === "ingredientes" && <IngredientesView />}
         </div>
     );
 }
