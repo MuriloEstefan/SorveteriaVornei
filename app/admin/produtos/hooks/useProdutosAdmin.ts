@@ -34,6 +34,18 @@ export function useProdutosAdmin() {
         });
     };
 
+    const atualizarPreco = async (id: number, novoPreco: number) => {
+        setProdutos((prev) =>
+            prev.map((p) => (p.id === id ? { ...p, preco: novoPreco } : p))
+        );
+
+        await fetch(`/api/admin/produtos/${id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ preco: novoPreco }),
+        });
+    };
+
     const alternarAtivo = async (id: number, ativoAtual: boolean) => {
         const novoValor = !ativoAtual;
 
@@ -53,5 +65,6 @@ export function useProdutosAdmin() {
         carregando,
         alternarDisponibilidade,
         alternarAtivo,
+        atualizarPreco,
     };
 }

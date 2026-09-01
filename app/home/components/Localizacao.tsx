@@ -1,11 +1,9 @@
 export default function Localizacao() {
     return (
-        // tom esverdeado escuro — transição suave vindo do Sorvetes
-        <section className="w-full bg-[#0f1f0c] pt-16 pb-0 flex flex-col items-center gap-10 px-6 overflow-hidden">
+        <section className="w-full pt-16 pb-0 flex flex-col items-center gap-10 px-6 overflow-hidden bg-gradient-to-b from-[#1f4d38] via-[#1a2e2a] to-[var(--bg-base)]">
 
-            {/* mesmo padrão de título das outras seções */}
             <div className="text-center">
-                <p className="text-[#8cdc6d] font-semibold text-lg uppercase tracking-widest mb-2">
+                <p className="text-[#000000] font-semibold text-lg uppercase tracking-widest mb-2">
                     Onde nos encontrar
                 </p>
                 <h2 className="text-5xl md:text-6xl font-extrabold text-white drop-shadow">

@@ -5,7 +5,11 @@ import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
-const navLinks = ["Home", "Sobre nós", "Contato"];
+const navLinks = [
+    { label: "Home", href: "#home" },
+    { label: "Cardápio", href: "#milkshakes" },
+    { label: "Sobre nós", href: "#sobre" },
+];
 
 export default function Header() {
     const [menuAberto, setMenuAberto] = useState(false);
@@ -36,18 +40,21 @@ export default function Header() {
                     <nav className="hidden md:flex items-center gap-8">
                         {navLinks.map((link) => (
                             <a
-                                key={link}
-                                href="#"
+                                key={link.label}
+                                href={link.href}
                                 className="text-white/60 hover:text-white text-lg font-medium transition-colors duration-200"
                             >
-                                {link}
+                                {link.label}
                             </a>
                         ))}
                         <Link href="/pedido">
-                            <button className="bg-[#6ddc8b] text-[#0e0818] text-sm font-bold px-5 py-2 rounded-full hover:bg-white transition-colors duration-200 hover: cursor-pointer">
+                        <button className="group relative bg-gradient-to-r from-[#6ddc8b] to-[#4bc470] text-[#0e0818] text-sm font-bold px-6 py-2.5 rounded-xl shadow-[0_4px_20px_-4px_rgba(109,220,139,0.5)] transition-all duration-300 hover:shadow-[0_6px_28px_-4px_rgba(109,220,139,0.7)] hover:-translate-y-0.5 cursor-pointer overflow-hidden">
+                            <span className="relative z-10 flex items-center gap-2">
                                 Fazer Pedido
-                            </button>
-                        </Link>
+                                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                            </span>
+                        </button>
+                    </Link>
                     </nav>
 
                     {/* Botão hamburger mobile */}
@@ -72,12 +79,12 @@ export default function Header() {
 
                     {navLinks.map((link) => (
                         <a
-                            key={link}
-                            href="#"
+                            key={link.label}
+                            href={link.href}
                             onClick={() => setMenuAberto(false)}
                             className="text-white text-3xl font-bold hover:text-[#6ddc8b] transition-colors"
                         >
-                            {link}
+                            {link.label}
                         </a>
                     ))}
 

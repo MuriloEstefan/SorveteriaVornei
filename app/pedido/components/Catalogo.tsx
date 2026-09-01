@@ -71,12 +71,10 @@ const router = useRouter();
                         setPedidoSelecionado(produto);
 
                         if (categoriaSelecionada === "Sorvete + Açaí") {
-                            console.log("Abrindo modal sorvete");
                             setTipoModal("sorvete");
                         }
 
                         if (categoriaSelecionada === "Milkshakes") {
-                            console.log("Abrindo modal milkshake");
                             setTipoModal("milkshake");
                         }
                         if (categoriaSelecionada === "Sobremesas") {

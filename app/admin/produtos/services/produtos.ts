@@ -37,3 +37,10 @@ export async function atualizarAtivo(id: number, ativo: boolean) {
         [ativo, id]
     );
 }
+
+export async function atualizarPreco(id: number, preco: number) {
+    await pool.query(
+        `UPDATE produtos SET preco = $1 WHERE id = $2`,
+        [preco, id]
+    )
+}

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import {
     atualizarDisponibilidade,
     atualizarAtivo,
+    atualizarPreco,
 } from "@/app/admin/produtos/services/produtos";
 
 export async function PATCH(
@@ -27,6 +28,10 @@ export async function PATCH(
 
         if (typeof body.ativo === "boolean") {
             await atualizarAtivo(id, body.ativo);
+        }
+
+        if (typeof body.preco === "number") {
+            await atualizarPreco(id, body.preco);
         }
 
         return NextResponse.json({ sucesso: true });

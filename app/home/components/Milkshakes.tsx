@@ -23,14 +23,15 @@ const saboresVornei = [
     { nome: "Chocomenta",     imagem: "/imagens/Milkshakes/MkChocomenta.png" },
     { nome: "Confete",        imagem: "/imagens/Milkshakes/MkConfete.png" },
     { nome: "Cookies",        imagem: "/imagens/Milkshakes/MkCookies.png" },
-    { nome: "Ninho",          imagem: "/imagens/Milkshakes/MkNinho.png" },
+    { nome: "Ninho",          imagem: "/imagens/Milkshakes/MkNinhoTrufado.png" },
     { nome: "Ninho Trufado",  imagem: "/imagens/Milkshakes/MkNinhoTrufado.png" },
     { nome: "Ouro Branco",    imagem: "/imagens/Milkshakes/MkOuroBranco.png" },
+    { nome: "Charge",             imagem: "/imagens/Milkshakes/MkCharge.png" },
 ];
 
 export default function Milkshakes() {
     return (
-       <section className="w-full bg-[#0d1a16] py-24 overflow-hidden">
+        <section id="milkshakes" className="w-full py-24 overflow-hidden bg-gradient-to-b from-[#0e0818] via-[#123024] to-[#1f4d38]">
             <div className="max-w-6xl mx-auto px-6">
 
                 {/* Cabeçalho */}
@@ -43,7 +44,6 @@ export default function Milkshakes() {
                             Nossos Sabores<br />
                             <span className="text-[#6ddc8b]">de Milkshake</span>
                         </h2>
-
                     </div>
                 </div>
 
@@ -69,7 +69,10 @@ export default function Milkshakes() {
                 >
                     {saboresVornei.map((sabor) => (
                         <SwiperSlide key={sabor.nome}>
-                            <div className="group flex flex-col items-center gap-3 cursor-pointer py-2">
+                            <div
+                                className="group flex flex-col items-center gap-3 cursor-pointer py-2"
+                                // onClick={() => abrirModalSabor(sabor)} // TODO: modal de detalhes do sabor
+                            >
                                 <Image
                                     src={sabor.imagem}
                                     alt={sabor.nome}
@@ -85,13 +88,6 @@ export default function Milkshakes() {
                     ))}
                 </Swiper>
 
-            </div>
-
-            {/* Ondinha */}
-            <div className="w-full overflow-hidden mt-16">
-                <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg">
-                    <path fill="#0e0818" d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" />
-                </svg>
             </div>
         </section>
     );

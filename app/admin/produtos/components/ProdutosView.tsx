@@ -4,7 +4,7 @@ import { useProdutosAdmin } from "../hooks/useProdutosAdmin";
 import ProdutoCard from "./ProdutoCard";
 
 export default function ProdutosView() {
-    const { produtos, carregando, alternarDisponibilidade, alternarAtivo } =
+    const { produtos, carregando, alternarDisponibilidade, alternarAtivo, atualizarPreco } =
         useProdutosAdmin();
 
     if (carregando) {
@@ -33,6 +33,7 @@ export default function ProdutosView() {
                                     alternarDisponibilidade(produto.id, produto.disponivel)
                                 }
                                 onToggleAtivo={() => alternarAtivo(produto.id, produto.ativo)}
+                                onSalvarPreco={(novoPreco) => atualizarPreco(produto.id, novoPreco)}
                             />
                         ))}
                     </div>

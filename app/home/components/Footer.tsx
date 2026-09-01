@@ -4,7 +4,7 @@ import { Phone, MapPin, Mail, Clock } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer id="contato" className="w-full bg-[var(--bg-base)] pt-12 pb-6 px-8 text-white">
+    <footer id="sobre" className="w-full bg-[var(--bg-base)] pt-12 pb-6 px-8 text-white">
       <div className="w-full px-6 md:px-16 grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-white/10">
         <div className="flex flex-col gap-4 text-center md:text-left">
           <div className="flex flex-col items-center text-center gap-3">
@@ -53,7 +53,7 @@ export default function Footer() {
           <h4 className="font-[family-name:var(--font-display)] font-bold text-lg text-[var(--mint)]">Links Rápidos</h4>
           <div className="flex flex-col gap-2 text-gray-400 text-sm items-center md:items-start">
             <a href="#home" className="hover:text-[var(--mint)] hover:translate-x-1 transition-all">Home</a>
-            <a href="#sabores" className="hover:text-[var(--mint)] hover:translate-x-1 transition-all">Cardápio</a>
+            <a href="#milkshakes" className="hover:text-[var(--mint)] hover:translate-x-1 transition-all">Cardápio</a>
             <a href="#sobre" className="hover:text-[var(--mint)] hover:translate-x-1 transition-all">Sobre nós</a>
             <a href="#contato" className="hover:text-[var(--mint)] hover:translate-x-1 transition-all">Contato</a>
             <Link href="/pedido" className="hover:text-[var(--mint)] hover:translate-x-1 transition-all">Fazer Pedido</Link>
