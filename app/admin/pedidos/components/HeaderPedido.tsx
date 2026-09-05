@@ -25,6 +25,11 @@ export default function HeaderPedido({
                 <span className="text-white/70 text-xs">
                     {pedido.tipo_entrega === "entrega" ? "🛵 Entrega" : "🏪 Retirada"}
                 </span>
+                {pedido.forma_pagamento?.toLowerCase() === "pix" && pedido.pago && (
+                    <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#6ddc8b]/15 text-[#6ddc8b] border border-[#6ddc8b]/30">
+                        ✓ Pago
+                    </span>
+                )}
             </div>
 
             <div className="text-right">

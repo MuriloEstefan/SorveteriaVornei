@@ -4,6 +4,7 @@ import DadosCliente from "./DadosCliente";
 import ListaItensPedido from "./ListaItensPedido";
 import BotaoStatus from "./BotaoStatus";
 import BotaoCancelar from "./BotaoCancelar";
+import BotaoPago from "./BotaoPago";
 
 interface CardPedidoProps {
     pedido: PedidoBanco;
@@ -13,6 +14,7 @@ interface CardPedidoProps {
         telefone: string
     ) => void;
     cancelarPedido: (id: number, telCliente: string) => void;
+    marcarPago: (id: number) => void;
     proximoStatus: Record<string, string>;
     statusConfig: Record<
         string,
@@ -27,6 +29,7 @@ export default function CardPedido({
     pedido,
     avancarStatus,
     cancelarPedido,
+    marcarPago,
     proximoStatus,
     statusConfig,
 }: CardPedidoProps) {
@@ -55,6 +58,11 @@ export default function CardPedido({
                     pedido={pedido}
                     avancarStatus={avancarStatus}
                     proximoStatus={proximoStatus}
+                />
+
+                <BotaoPago 
+                    pedido={pedido} 
+                    marcarPago={marcarPago} 
                 />
 
                 <BotaoCancelar

@@ -7,11 +7,13 @@ import TotalCarrinho from "./TotalCarrinho";
 type Props = {
     carrinho: ItemCarrinho[];
     removerItem: (index: number) => void;
+    finalizarCompra: () => void;
 };
 
 export default function Carrinho({
     carrinho,
     removerItem,
+    finalizarCompra,
 }: Props) {
 
 const totalPedidos = carrinho.reduce((total, item) => {
@@ -37,6 +39,7 @@ const totalPedidos = carrinho.reduce((total, item) => {
             <TotalCarrinho
                 carrinho={carrinho}
                 totalPedidos={totalPedidos}
+                finalizarCompra={finalizarCompra}
             />
 
         </div>

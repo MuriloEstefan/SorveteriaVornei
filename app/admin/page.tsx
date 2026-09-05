@@ -1,6 +1,6 @@
 "use client";
 
-import { usePedidos } from "./hooks/usePedidos";
+import { usePedidos } from "./pedidos/hooks/usePedidos";
 import CardPedido from "./pedidos/components/CardPedido";
 import { useLojaStatus } from "./pedidos/hooks/useLojaStatus";
 import ToggleLoja from "./pedidos/components/ToggleLoja";
@@ -18,6 +18,7 @@ export default function AdminPage() {
         pedidos, 
         avancarStatus,
         cancelarPedido,
+        marcarPago,
         proximoStatus 
     } = usePedidos();
 
@@ -30,7 +31,7 @@ export default function AdminPage() {
             <div className="flex items-center justify-between mb-8">
                 <div>
                     <h1 className="text-3xl font-black">Painel Admin</h1>
-                    <p className="text-white/30 text-sm mt-1">Atualiza a cada 10 segundos · {pedidos.length} pedidos</p>
+                    <p className="text-white/30 text-sm mt-1">{pedidos.length} pedidos</p>
                 </div>
 
                 <ToggleLoja aberta={aberta} carregando={carregando} onAlternar={alternar} />
@@ -44,6 +45,7 @@ export default function AdminPage() {
                         pedido={pedido}
                         avancarStatus={avancarStatus}
                         cancelarPedido={cancelarPedido}
+                        marcarPago={marcarPago}
                         proximoStatus={proximoStatus}
                         statusConfig={statusConfig}
                     />

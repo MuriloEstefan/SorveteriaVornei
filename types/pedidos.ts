@@ -98,6 +98,7 @@ export type PedidoBanco = {
     status: string;
     criado_em: string;
     itens: ItemPedidoBanco[];
+    pago: boolean;
 };
 
 export type Props = {

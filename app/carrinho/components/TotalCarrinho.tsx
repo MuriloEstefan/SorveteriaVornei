@@ -4,11 +4,13 @@ import FecharPedido from "./fecharPedido/FecharPedido";
 interface TotalCarrinhoProps {
     carrinho: ItemCarrinho[];
     totalPedidos: number;
+    finalizarCompra: () => void;
 }
 
 export default function TotalCarrinho({
     carrinho,
     totalPedidos,
+    finalizarCompra,
 }: TotalCarrinhoProps) {
 
     return (
@@ -29,6 +31,7 @@ export default function TotalCarrinho({
             <FecharPedido
                 carrinho={carrinho}
                 totalPedidos={totalPedidos}
+                finalizarCompra={finalizarCompra}
             />
 
         </div>

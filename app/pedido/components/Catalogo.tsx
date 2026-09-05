@@ -10,13 +10,15 @@ import { buscarProdutosApi } from "../services/produtosApi";
 import ModalMilkshake from "./modals/ModalMilkshake";
 import ModalSobremesa from "./modals/ModalSobremesa";
 import ModalSorveteAcai from "./modals/ModalSorveteAcai";
+import ModalAcaiCopo from "./modals/ModalAcaiCopo";
+
 
 export default function Catalogo() {
     const [produtos, setProdutos] = useState<Produto[]>([]);
     const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
     const [pedidoSelecionado, setPedidoSelecionado] = useState<Produto | null>(null);
     const [carrinho, setCarrinho] = useState<ItemCarrinho[]>([]);
-    const [tipoModal, setTipoModal] = useState<"sorvete" | "milkshake" | "sobremesa" | null>(null);
+    const [tipoModal, setTipoModal] = useState<"sorvete" | "milkshake" | "sobremesa" | "acaiCopo" | null>(null);
 
     useEffect(() => {
         const carrinhoSalvo = localStorage.getItem("carrinho");
@@ -80,6 +82,9 @@ const router = useRouter();
                         if (categoriaSelecionada === "Sobremesas") {
                             setTipoModal("sobremesa");
                         }
+                        if (categoriaSelecionada === "Açaí no Copo") {
+                            setTipoModal("acaiCopo");
+                        }
                     }}
 
                     adicionarAoCarrinho={adicionarAoCarrinho}
@@ -108,6 +113,16 @@ const router = useRouter();
                 )}
                 {tipoModal === "sobremesa" && (
                     <ModalSobremesa
+                        produto={pedidoSelecionado}
+                        fechar={() => {
+                            setPedidoSelecionado(null);
+                            setTipoModal(null);
+                        }}
+                        adicionarAoCarrinho={adicionarAoCarrinho}
+                    />
+                )}
+                {tipoModal === "acaiCopo" && (
+                    <ModalAcaiCopo
                         produto={pedidoSelecionado}
                         fechar={() => {
                             setPedidoSelecionado(null);

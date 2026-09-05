@@ -4,10 +4,12 @@ import Carrinho from "@/app/carrinho/components/Carrinho";
 import Header from "../pedido/components/Header";
 import { ItemCarrinho } from "@/types/pedidos";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function PaginaCarrinho() {
 
    const [carrinho, setCarrinho] = useState<ItemCarrinho[]>([]);
+   const router = useRouter();
 
     useEffect(() => {
         const carrinhoSalvo = localStorage.getItem("carrinho");
@@ -29,6 +31,12 @@ export default function PaginaCarrinho() {
         );
     };
 
+    const finalizarCompra = () => {
+        setCarrinho([]);
+        localStorage.removeItem("carrinho");
+        router.push("/pedido");
+    };
+
     return (
         <main className="min-h-screen bg-[#140f1f] p-6">
             <Header titulo="Seu Carrinho" />
@@ -36,6 +44,7 @@ export default function PaginaCarrinho() {
             <Carrinho
                 carrinho={carrinho}
                 removerItem={removerItem}
+                finalizarCompra={finalizarCompra}
             />
         </main>
     );

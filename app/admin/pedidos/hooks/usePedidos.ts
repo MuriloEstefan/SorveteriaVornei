@@ -24,8 +24,6 @@ export function usePedidos() {
         const resposta = await fetch("/api/admin/pedidos");
         const dados = await resposta.json();
 
-        // Segurança extra: mesmo que a API mande tudo, aqui só deixa passar
-        // pedidos que ainda estão "vivos" (precisam de alguma ação)
         const pedidosAtivos = dados.filter((p: PedidoBanco) =>
             STATUS_ATIVOS.includes(p.status)
         );
@@ -39,7 +37,6 @@ export function usePedidos() {
         return () => clearInterval(intervalo);
     }, []);
 
-    
     const abrirWhatsAppCliente = (telefone: string, novoStatus: string) => {
         const mensagem = mensagemPorStatus[novoStatus];
         if (!mensagem) return;
@@ -52,7 +49,7 @@ export function usePedidos() {
     const avancarStatus = async (id: number, statusAtual: string, telCliente: string) => {
         const novoStatus = proximoStatus[statusAtual];
 
-        if (!novoStatus) return; //já está em "entregue", não avança mais
+        if (!novoStatus) return;
 
         await fetch(`/api/admin/pedidos/${id}`, {
             method: "PATCH",
@@ -62,26 +59,38 @@ export function usePedidos() {
 
         abrirWhatsAppCliente(telCliente, novoStatus);
 
-        buscarPedidos(); //atualiza a tela
+        buscarPedidos();
     }
 
     const cancelarPedido = async (id: number, telCliente: string) => {
-    const confirmar = window.confirm("Tem certeza que deseja cancelar esse pedido?");
-    if (!confirmar) return;
+        const confirmar = window.confirm("Tem certeza que deseja cancelar esse pedido?");
+        if (!confirmar) return;
 
-    await fetch(`/api/admin/pedidos/${id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: "cancelado" })
-    });
+        await fetch(`/api/admin/pedidos/${id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ status: "cancelado" })
+        });
 
-    buscarPedidos(); // atualiza a tela
-}
+        buscarPedidos();
+    }
+
+    // NOVO
+    const marcarPago = async (id: number) => {
+        await fetch(`/api/admin/pedidos/${id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ pago: true })
+        });
+
+        buscarPedidos();
+    }
 
     return {
         pedidos,
         avancarStatus,
         cancelarPedido,
+        marcarPago, 
         proximoStatus
     };
 }

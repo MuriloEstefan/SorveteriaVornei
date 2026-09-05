@@ -82,16 +82,25 @@ export async function PATCH(
             return NextResponse.json({ erro: "ID inválido" }, { status: 400 });
         }
 
-        const { status } = await req.json();
+        const body = await req.json();
 
-        await pool.query(
-            `UPDATE pedidos SET status = $1 WHERE id = $2`,
-            [status, id]
-        );
+        if (body.status !== undefined) {
+            await pool.query(
+                `UPDATE pedidos SET status = $1 WHERE id = $2`,
+                [body.status, id]
+            );
+        }
+
+        if (body.pago !== undefined) {
+            await pool.query(
+                `UPDATE pedidos SET pago = $1 WHERE id = $2`,
+                [body.pago, id]
+            );
+        }
 
         return NextResponse.json({ sucesso: true });
     } catch (error) {
-        console.error("Erro ao atualizar status do pedido:", error);
+        console.error("Erro ao atualizar pedido:", error);
         return NextResponse.json({ erro: "Erro ao atualizar pedido" }, { status: 500 });
     }
 }

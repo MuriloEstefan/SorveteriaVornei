@@ -1,6 +1,6 @@
 "use client";
 
-import DadosCliente from "./DadosCliente";
+import DadosCliente from "./FormCliente";
 import { ItemCarrinho } from "@/types/pedidos";
 import { useFecharPedido } from "../../hooks/useFecharPedido";
 import { useLojaAberta } from "../../hooks/useLojaAberta"; 
@@ -15,9 +15,10 @@ import { toast } from "react-toastify";
 type Props = {
     carrinho: ItemCarrinho[];
     totalPedidos: number;
+    finalizarCompra: () => void;
 }
 
-export default function FecharCarrinho({carrinho, totalPedidos}: Props) {
+export default function FecharCarrinho({carrinho, totalPedidos, finalizarCompra}: Props) {
     const lojaAberta = useLojaAberta(); 
 
     const {
@@ -41,7 +42,7 @@ export default function FecharCarrinho({carrinho, totalPedidos}: Props) {
         colher: false,
     });
 
-    const [frete, setFrete] = useState(0); // ← adicionado
+    const [frete, setFrete] = useState(0);
 
     return (
         <>
@@ -134,11 +135,12 @@ export default function FecharCarrinho({carrinho, totalPedidos}: Props) {
                             bairro={bairro}
                             complemento={complemento}
                             cidade={cidade}
-                            frete={frete} // ← adicionado
+                            frete={frete} 
                             carrinho={carrinho}
                             totalPedidos={totalPedidos}
                             voltar={() => setEtapa(2)}
                             fecharModal={() => setAberto(false)}
+                            finalizarCompra={finalizarCompra}
                         />
                     )}
                 </Modal>

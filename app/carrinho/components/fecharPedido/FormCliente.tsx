@@ -69,7 +69,20 @@ export default function DadosCliente({ voltar, continuar }: Props) {
                     type="tel"
                     placeholder="Telefone"
                     value={telefone}
-                    onChange={(e) => setTelefone(e.target.value)}
+                    onChange={(e) => {
+                        const valor = e.target.value;
+
+                        if (valor !== "" && !/^\d+$/.test(valor)) {
+                            toast.error("Informe um número válido. ", {
+                                toastId: "telefone-invalido",
+                            })
+                            return;
+                        }
+
+                        if (valor.length > 11) return;
+
+                        setTelefone(valor);
+                    }}
                     className="w-full bg-[#2b2340] rounded-xl p-3 outline-none text-white"
                 />
             </div>
@@ -101,6 +114,11 @@ export default function DadosCliente({ voltar, continuar }: Props) {
 
                     if (!nome.trim() || !sobrenome.trim() || !telefone.trim()) {
                         toast.error("Preencha os campos obrigatorios!")
+                        return;
+                    }
+
+                    if (telefone.length < 10) {
+                        toast.error("Informe um telefone válido");
                         return;
                     }
 
