@@ -11,7 +11,8 @@ interface CardPedidoProps {
     avancarStatus: (
         id: number,
         statusAtual: string,
-        telefone: string
+        telefone: string,
+        tipoEntrega: string
     ) => void;
     cancelarPedido: (id: number, telCliente: string) => void;
     marcarPago: (id: number) => void;

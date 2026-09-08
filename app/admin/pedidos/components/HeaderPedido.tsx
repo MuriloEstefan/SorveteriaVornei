@@ -15,12 +15,19 @@ export default function HeaderPedido({
     pedido,
     statusConfig,
 }: HeaderPedidoProps) {
+    const configBase = statusConfig[pedido.status];
+
+    const labelExibido =
+        pedido.status === "saiu_entrega" && pedido.tipo_entrega === "retirada"
+            ? "Pronto p/ Retirar"
+            : configBase?.label ?? pedido.status;
+
     return(
         <div className="flex items-center justify-between px-5 py-3 bg-[#221a35] border-b border-white/5">
             <div className="flex items-center gap-3">
                 <span className="text-white/30 text-xs font-mono">#{pedido.id}</span>
-                <span className={`text-xs font-bold px-3 py-1 rounded-full ${statusConfig[pedido.status]?.cor ?? "bg-white/10 text-white"}`}>
-                    {statusConfig[pedido.status]?.label ?? pedido.status}
+                <span className={`text-xs font-bold px-3 py-1 rounded-full ${configBase?.cor ?? "bg-white/10 text-white"}`}>
+                    {labelExibido}
                     </span>
                 <span className="text-white/70 text-xs">
                     {pedido.tipo_entrega === "entrega" ? "🛵 Entrega" : "🏪 Retirada"}

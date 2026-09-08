@@ -5,6 +5,21 @@ import { PedidoBanco } from "@/types/pedidos";
 
 const STATUS_ATIVOS = ["recebido", "em_preparo", "saiu_entrega"];
 
+function montarMensagem(novoStatus: string, tipoEntrega: string): string | null {
+    if (novoStatus === "em_preparo") {
+        return "Olá! Seu pedido está sendo preparado. 👩‍🍳";
+    }
+
+    if (novoStatus === "saiu_entrega") {
+        if (tipoEntrega === "retirada") {
+            return "Olá! Seu pedido está pronto e já pode ser retirado. 🍦";
+        }
+        return "Olá! Seu pedido saiu para entrega. 🙏🙏";
+    }
+
+    return null;
+}
+
 export function usePedidos() {
 
     const [pedidos, setPedidos] = useState<PedidoBanco[]>([]);
@@ -14,11 +29,6 @@ export function usePedidos() {
         em_preparo: "saiu_entrega",
         saiu_entrega: "entregue",
     };
-
-    const mensagemPorStatus: Record<string, string> = {
-        em_preparo: "Olá! Seu pedido está sendo preparado. 👩‍🦰",
-        saiu_entrega: "Olá! Seu pedido saiu para entrega. 🙏🙏",
-    }
 
     const buscarPedidos = async () => {
         const resposta = await fetch("/api/admin/pedidos");
@@ -37,8 +47,8 @@ export function usePedidos() {
         return () => clearInterval(intervalo);
     }, []);
 
-    const abrirWhatsAppCliente = (telefone: string, novoStatus: string) => {
-        const mensagem = mensagemPorStatus[novoStatus];
+    const abrirWhatsAppCliente = (telefone: string, novoStatus: string, tipoEntrega: string) => {
+        const mensagem = montarMensagem(novoStatus, tipoEntrega);
         if (!mensagem) return;
 
         const numeroLimpo = telefone.replace(/\D/g, "");
@@ -46,7 +56,7 @@ export function usePedidos() {
         window.open(url, "_blank");
     }
 
-    const avancarStatus = async (id: number, statusAtual: string, telCliente: string) => {
+    const avancarStatus = async (id: number, statusAtual: string, telCliente: string, tipoEntrega: string) => {
         const novoStatus = proximoStatus[statusAtual];
 
         if (!novoStatus) return;
@@ -57,7 +67,7 @@ export function usePedidos() {
             body: JSON.stringify({ status: novoStatus })
         });
 
-        abrirWhatsAppCliente(telCliente, novoStatus);
+        abrirWhatsAppCliente(telCliente, novoStatus, tipoEntrega);
 
         buscarPedidos();
     }
@@ -75,7 +85,6 @@ export function usePedidos() {
         buscarPedidos();
     }
 
-    // NOVO
     const marcarPago = async (id: number) => {
         await fetch(`/api/admin/pedidos/${id}`, {
             method: "PATCH",

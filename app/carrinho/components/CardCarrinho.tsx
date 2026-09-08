@@ -16,7 +16,7 @@ const ehAcai = (nome: string) => {
 };
 
 function temDetalhes(categoria: string, nome: string) {
-    return ehAcai(nome) || categoria === "Sobremesas";
+    return ehAcai(nome) || categoria === "Sobremesas" || categoria === "Açaí no Copo";
 }
 
 function nomeExibicao(categoria: string, nome: string) {
@@ -25,6 +25,10 @@ function nomeExibicao(categoria: string, nome: string) {
     }
     if (categoria === "Sorvete + Açaí") {
         return `Sorvete/Açaí ${nome}`;
+    }
+    if (categoria === "Açaí no Copo") {
+        const nomeSemPrefixo = nome.replace(/^Açaí\s*/i, "");
+        return `Açaí no Copo ${nomeSemPrefixo}`;
     }
     return nome;
 }

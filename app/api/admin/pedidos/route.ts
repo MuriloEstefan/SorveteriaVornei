@@ -35,6 +35,7 @@ export async function GET() {
                 observacao: pedido.observacao,
                 colher: pedido.colher,
                 forma_pagamento: pedido.forma_pagamento,
+                pago: pedido.pago,
                 troco_para: pedido.troco_para === null
                     ? null
                     : Number(pedido.troco_para),

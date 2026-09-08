@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
 import BadgeStatusLoja from "./BadgeStatusLoja";
+import BadgeTempoEntrega from "./BadgeTempoEntrega";
 
 type Props = {
     titulo: string;
@@ -24,8 +25,9 @@ export default function Header({ titulo }: Props) {
                         <h1 className="text-lg font-bold leading-tight">
                             {titulo}
                         </h1>
-                        <div className="mt-1">
+                        <div className="mt-1 flex flex-wrap items-center gap-1.5">
                             <BadgeStatusLoja />
+                            <BadgeTempoEntrega />
                         </div>
                     </div>
                 </Link>

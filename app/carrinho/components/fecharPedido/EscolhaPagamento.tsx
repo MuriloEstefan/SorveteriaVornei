@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { ArrowLeft, QrCode, CreditCard, Banknote, Check } from "lucide-react";
 import { ItemCarrinho } from "@/types/pedidos";
 import { toast } from "react-toastify";
 import { finalizarPedido } from "@/components/services/finalizarPedido";
 import { abrirWhatsApp } from "@/components/services/abrirWhatsApp";
 import ConfirmacaoPix from "./ConfirmacaoPix";
+import { TEMPO_ENTREGA_MINUTOS } from "@/lib/tempoEntrega";
 
 type Props = {
     formaPagamento: string;
@@ -76,9 +76,6 @@ export default function EscolhaPagamento({
 }: Props) {
     const totalComFrete = totalPedidos + frete;
 
-    const [mostrarPix, setMostrarPix] = useState(false);
-    const [dadosPedidoCriado, setDadosPedidoCriado] = useState<any>(null);
-
     const montarDadosPedido = () => ({
         cliente: dadosCliente,
         entrega: {
@@ -98,20 +95,9 @@ export default function EscolhaPagamento({
         total: totalComFrete,
     });
 
-    const criarPedido = async () => {
-        if (!formaPagamento) {
-            toast.error("Escolha uma forma de pagamento.");
-            return;
-        }
-
+    const confirmarEEnviar = async () => {
         const dadosPedido = montarDadosPedido();
         await finalizarPedido(dadosPedido);
-
-        if (formaPagamento === "PIX") {
-            setDadosPedidoCriado(dadosPedido);
-            setMostrarPix(true);
-            return;
-        }
 
         abrirWhatsApp(dadosPedido);
         toast.success("Pedido realizado com sucesso!");
@@ -119,21 +105,14 @@ export default function EscolhaPagamento({
         finalizarCompra();
     };
 
-    const confirmarPagamentoPix = () => {
-        abrirWhatsApp(dadosPedidoCriado);
-        toast.success("Pedido realizado com sucesso!");
-        fecharModal();
-        finalizarCompra();
-    };
+    const clicouFinalizarPedido = async () => {
+        if (!formaPagamento) {
+            toast.error("Escolha uma forma de pagamento.");
+            return;
+        }
 
-    if (mostrarPix) {
-        return (
-            <ConfirmacaoPix
-                onConfirmar={confirmarPagamentoPix}
-                onVoltar={() => setMostrarPix(false)}
-            />
-        );
-    }
+        await confirmarEEnviar();
+    };
 
     return (
     <div className="mt-5 space-y-6">
@@ -241,7 +220,20 @@ export default function EscolhaPagamento({
             </div>
         )}
 
+        {formaPagamento === "PIX" && (
+            <div className="animate-fade-in">
+                <ConfirmacaoPix onConfirmar={confirmarEEnviar} />
+            </div>
+        )}
+
         <div className="bg-white/5 rounded-2xl p-4 space-y-2">
+           {tipoEntrega === "entrega" && (
+                <div className="flex justify-between text-sm text-white/60">
+                    <span>Tempo estimado</span>
+                    <span>{TEMPO_ENTREGA_MINUTOS} min</span>
+                </div>
+            )}
+
             <div className="flex justify-between text-sm text-white/60">
                 <span>Subtotal</span>
                 <span>{formatarMoeda(totalPedidos)}</span>
@@ -260,23 +252,25 @@ export default function EscolhaPagamento({
             </div>
         </div>
 
-        <button
-            onClick={criarPedido}
-            className="
-                w-full
-                bg-green-600
-                hover:bg-green-500
-                active:scale-[0.98]
-                transition
-                py-4
-                rounded-2xl
-                font-bold
-                text-white
-                cursor-pointer
-            "
-        >
-            Finalizar Pedido
-        </button>
+        {formaPagamento !== "PIX" && (
+            <button
+                onClick={clicouFinalizarPedido}
+                className="
+                    w-full
+                    bg-green-600
+                    hover:bg-green-500
+                    active:scale-[0.98]
+                    transition
+                    py-4
+                    rounded-2xl
+                    font-bold
+                    text-white
+                    cursor-pointer
+                "
+            >
+                Finalizar Pedido e Acompanhar pelo Whatsapp
+            </button>
+        )}
 
     </div>
     );

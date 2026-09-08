@@ -1,0 +1,1 @@
+export const TEMPO_ENTREGA_MINUTOS = 60;
