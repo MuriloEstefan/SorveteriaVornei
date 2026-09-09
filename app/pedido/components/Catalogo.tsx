@@ -21,7 +21,7 @@ export default function Catalogo() {
     const [tipoModal, setTipoModal] = useState<"sorvete" | "milkshake" | "sobremesa" | "acaiCopo" | null>(null);
 
     useEffect(() => {
-        const carrinhoSalvo = localStorage.getItem("carrinho");
+        const carrinhoSalvo = sessionStorage.getItem("carrinho");
 
 
         if (carrinhoSalvo) {
@@ -54,7 +54,7 @@ export default function Catalogo() {
     setCarrinho(novoCarrinho);
 
     if (typeof window !== "undefined") { // proteção
-        localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
+        sessionStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
     }
 }
 

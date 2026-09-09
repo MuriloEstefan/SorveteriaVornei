@@ -12,20 +12,16 @@ export default function PaginaCarrinho() {
    const router = useRouter();
 
     useEffect(() => {
-        const carrinhoSalvo = localStorage.getItem("carrinho");
+        const carrinhoSalvo = sessionStorage.getItem("carrinho");
         if (carrinhoSalvo) {
-             
             setCarrinho(JSON.parse(carrinhoSalvo));
         }
-}, []); // roda só no cliente, depois da hidratação
+    }, []); // roda só no cliente, depois da hidratação
 
     const removerItem = (index: number) => {
-
         const novoCarrinho = carrinho.filter((_, i) => i !== index);
-
         setCarrinho(novoCarrinho);
-
-        localStorage.setItem(
+        sessionStorage.setItem(
             "carrinho",
             JSON.stringify(novoCarrinho)
         );
@@ -33,7 +29,7 @@ export default function PaginaCarrinho() {
 
     const finalizarCompra = () => {
         setCarrinho([]);
-        localStorage.removeItem("carrinho");
+        sessionStorage.removeItem("carrinho");
         router.push("/pedido");
     };
 
