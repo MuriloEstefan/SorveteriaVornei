@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Lock } from "lucide-react";
 import { toast } from "react-toastify";
@@ -8,7 +8,29 @@ import { toast } from "react-toastify";
 export default function LoginPage() {
     const [senha, setSenha] = useState("");
     const [carregando, setCarregando] = useState(false);
+    const [segundosRestantes, setSegundosRestantes] = useState<number | null>(null);
     const router = useRouter();
+
+    // conta regressiva: decrementa 1 a cada segundo enquanto houver bloqueio
+    useEffect(() => {
+        if (segundosRestantes === null || segundosRestantes <= 0) return;
+
+        const intervalo = setInterval(() => {
+            setSegundosRestantes((atual) => {
+                if (atual === null) return null;
+                if (atual <= 1) return null; // zera e libera o login de novo
+                return atual - 1;
+            });
+        }, 1000);
+
+        return () => clearInterval(intervalo);
+    }, [segundosRestantes]);
+
+    const formatarTempo = (segundos: number) => {
+        const min = Math.floor(segundos / 60).toString().padStart(2, "0");
+        const seg = (segundos % 60).toString().padStart(2, "0");
+        return `${min}:${seg}`;
+    };
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -27,8 +49,16 @@ export default function LoginPage() {
                 body: JSON.stringify({ senha }),
             });
 
+            const dados = await resposta.json();
+
+            if (resposta.status === 429) {
+                setSegundosRestantes(dados.segundosRestantes ?? 180);
+                setCarregando(false);
+                return;
+            }
+
             if (!resposta.ok) {
-                toast.error("Senha incorreta.");
+                toast.error(dados.erro ?? "Senha incorreta.");
                 setCarregando(false);
                 return;
             }
@@ -40,6 +70,8 @@ export default function LoginPage() {
             setCarregando(false);
         }
     };
+
+    const bloqueado = segundosRestantes !== null && segundosRestantes > 0;
 
     return (
         <div className="min-h-screen bg-[#0e0818] flex items-center justify-center p-6">
@@ -59,6 +91,17 @@ export default function LoginPage() {
                     Digite a senha para continuar
                 </p>
 
+                {bloqueado && (
+                    <div className="mb-4 rounded-xl bg-red-500/10 border border-red-500/30 p-4 text-center">
+                        <p className="text-red-400 text-sm font-medium">
+                            Muitas tentativas. Tente novamente em:
+                        </p>
+                        <p className="text-red-300 text-2xl font-bold tracking-wider mt-1">
+                            {formatarTempo(segundosRestantes!)}
+                        </p>
+                    </div>
+                )}
+
                 <form onSubmit={handleLogin} className="space-y-4">
 
                     <input
@@ -67,6 +110,7 @@ export default function LoginPage() {
                         onChange={(e) => setSenha(e.target.value)}
                         placeholder="Senha"
                         autoFocus
+                        disabled={bloqueado}
                         className="
                             w-full
                             bg-white/5
@@ -78,12 +122,14 @@ export default function LoginPage() {
                             placeholder:text-white/30
                             focus:border-purple-500/50
                             transition
+                            disabled:opacity-40
+                            disabled:cursor-not-allowed
                         "
                     />
 
                     <button
                         type="submit"
-                        disabled={carregando}
+                        disabled={carregando || bloqueado}
                         className="
                             w-full
                             bg-purple-600
@@ -99,7 +145,11 @@ export default function LoginPage() {
                             cursor-pointer
                         "
                     >
-                        {carregando ? "Entrando..." : "Entrar"}
+                        {bloqueado
+                            ? "Aguarde..."
+                            : carregando
+                                ? "Entrando..."
+                                : "Entrar"}
                     </button>
 
                 </form>
