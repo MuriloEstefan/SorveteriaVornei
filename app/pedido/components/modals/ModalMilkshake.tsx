@@ -60,17 +60,17 @@ export default function ModalMilkshake({
 
                 {/* Imagem com fundo destacado */}
              {/* Imagem com fundo destacado */}
-<div className="flex justify-center -mt-2 mb-4">
-    <div className="w-36 h-36 rounded-full bg-gradient-to-br from-purple-600/30 to-purple-900/30 overflow-hidden ring-1 ring-white/10">
-        <Image
-            src={produto.imagem}
-            alt={produto.nome}
-            width={280}
-            height={280}
-            className="w-full h-full object-cover scale-100"
-        />
-    </div>
-</div>
+                <div className="flex justify-center -mt-2 mb-4">
+                    <div className="w-36 h-36 rounded-full bg-gradient-to-br from-purple-600/30 to-purple-900/30 overflow-hidden ring-1 ring-white/10">
+                        <Image
+                            src={produto.imagem}
+                            alt={produto.nome}
+                            width={280}
+                            height={280}
+                            className="w-full h-full object-cover scale-100"
+                        />
+                    </div>
+                </div>
 
                 <div className="px-6 pb-6">
 
