@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/grid";
 
 const saboresVornei = [
-    { nome: "Oreo",               imagem: "/imagens/Milkshakes/Mkoreo.png" },
+    { nome: "Oreo",               imagem: "/imagens/Milkshakes/MkOreo.png" },
     { nome: "Ovomaltine",         imagem: "/imagens/Milkshakes/MkOvomaltine.png" },
     { nome: "Kinder Bueno",       imagem: "/imagens/Milkshakes/MkKinder.png" },
     { nome: "Ferrero Roche",      imagem: "/imagens/Milkshakes/MkFerrero.png" },
