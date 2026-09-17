@@ -3,7 +3,7 @@ import { PedidoBanco } from "@/types/pedidos";
 interface BotaoStatusProps {
     pedido: PedidoBanco;
     avancarStatus: (
-        id: number,
+        id: string,
         statusAtual: string,
         telefone: string,
         tipoEntrega: string

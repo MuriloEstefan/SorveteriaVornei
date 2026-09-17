@@ -9,13 +9,13 @@ import BotaoPago from "./BotaoPago";
 interface CardPedidoProps {
     pedido: PedidoBanco;
     avancarStatus: (
-        id: number,
+        id: string,
         statusAtual: string,
         telefone: string,
         tipoEntrega: string
     ) => void;
-    cancelarPedido: (id: number, telCliente: string) => void;
-    marcarPago: (id: number) => void;
+    cancelarPedido: (id: string, telCliente: string) => void;
+    marcarPago: (id: string) => void;
     proximoStatus: Record<string, string>;
     statusConfig: Record<
         string,

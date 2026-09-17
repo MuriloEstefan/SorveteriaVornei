@@ -2,7 +2,7 @@ import { PedidoBanco } from "@/types/pedidos";
 
 interface BotaoCancelarProps {
     pedido: PedidoBanco;
-    cancelarPedido: (id: number, telCliente: string) => void;
+    cancelarPedido: (id: string, telCliente: string) => void;
 }
 
 export default function BotaoCancelar({

@@ -20,7 +20,7 @@ export function useProdutosAdmin() {
     }, []);
 
     // Atualiza local (otimista) + envia pro backend
-    const alternarDisponibilidade = async (id: number, disponivelAtual: boolean) => {
+    const alternarDisponibilidade = async (id: string, disponivelAtual: boolean) => {
         const novoValor = !disponivelAtual;
 
         setProdutos((prev) =>
@@ -34,7 +34,7 @@ export function useProdutosAdmin() {
         });
     };
 
-    const atualizarPreco = async (id: number, novoPreco: number) => {
+    const atualizarPreco = async (id: string, novoPreco: number) => {
         setProdutos((prev) =>
             prev.map((p) => (p.id === id ? { ...p, preco: novoPreco } : p))
         );
@@ -46,7 +46,7 @@ export function useProdutosAdmin() {
         });
     };
 
-    const alternarAtivo = async (id: number, ativoAtual: boolean) => {
+    const alternarAtivo = async (id: string, ativoAtual: boolean) => {
         const novoValor = !ativoAtual;
 
         setProdutos((prev) =>

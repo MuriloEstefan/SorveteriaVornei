@@ -56,7 +56,7 @@ export function usePedidos() {
         window.open(url, "_blank");
     }
 
-    const avancarStatus = async (id: number, statusAtual: string, telCliente: string, tipoEntrega: string) => {
+    const avancarStatus = async (id: string, statusAtual: string, telCliente: string, tipoEntrega: string) => {
         const novoStatus = proximoStatus[statusAtual];
 
         if (!novoStatus) return;
@@ -72,7 +72,7 @@ export function usePedidos() {
         buscarPedidos();
     }
 
-    const cancelarPedido = async (id: number, telCliente: string) => {
+    const cancelarPedido = async (id: string, telCliente: string) => {
         const confirmar = window.confirm("Tem certeza que deseja cancelar esse pedido?");
         if (!confirmar) return;
 
@@ -85,7 +85,7 @@ export function usePedidos() {
         buscarPedidos();
     }
 
-    const marcarPago = async (id: number) => {
+    const marcarPago = async (id: string) => {
         await fetch(`/api/admin/pedidos/${id}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },

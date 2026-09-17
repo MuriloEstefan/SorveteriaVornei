@@ -2,7 +2,7 @@ import { PedidoBanco } from "@/types/pedidos";
 
 interface BotaoPagoProps {
     pedido: PedidoBanco;
-    marcarPago: (id: number) => void;
+    marcarPago: (id: string) => void;
 }
 
 export default function BotaoPago({ pedido, marcarPago }: BotaoPagoProps) {
