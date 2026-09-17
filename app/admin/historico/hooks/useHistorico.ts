@@ -45,7 +45,7 @@ export function useHistorico() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const abrirDetalhes = async (id: number) => {
+    const abrirDetalhes = async (id: string) => {
         setCarregandoDetalhe(true);
         setPedidoSelecionado(null);
 
