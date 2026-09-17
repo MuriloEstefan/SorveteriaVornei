@@ -19,7 +19,7 @@ export function useIngredientesAdmin() {
         buscarIngredientes();
     }, []);
 
-    const alternarDisponibilidade = async (id: number, disponivelAtual: boolean) => {
+    const alternarDisponibilidade = async (id: string, disponivelAtual: boolean) => {
         const novoValor = !disponivelAtual;
 
         setIngredientes((prev) =>
