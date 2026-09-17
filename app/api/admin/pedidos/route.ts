@@ -22,6 +22,7 @@ export async function GET() {
 
             return {
                 id: pedido.id,
+                numero_pedido: pedido.numero_pedido,
                 nome: pedido.nome,
                 sobrenome: pedido.sobrenome,
                 telefone: pedido.telefone,

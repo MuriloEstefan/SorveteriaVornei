@@ -64,7 +64,7 @@ export async function listarHistorico(filtros: FiltrosHistorico) {
 
     const resultado = await pool.query(
         `
-        SELECT id, nome, sobrenome, telefone, total, status, criado_em
+        SELECT id, numero_pedido, nome, sobrenome, telefone, total, status, criado_em
         FROM pedidos
         WHERE ${condicoes.join(" AND ")}
         ORDER BY criado_em DESC
@@ -74,6 +74,7 @@ export async function listarHistorico(filtros: FiltrosHistorico) {
 
     return resultado.rows.map((p) => ({
         id: p.id,
+        numero_pedido: p.numero_pedido,
         nome: p.nome,
         sobrenome: p.sobrenome,
         telefone: p.telefone,

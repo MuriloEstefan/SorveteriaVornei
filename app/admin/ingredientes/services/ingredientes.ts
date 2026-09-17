@@ -9,7 +9,7 @@ export async function listarIngredientesAdmin() {
     return resultado.rows;
 }
 
-export async function atualizarDisponibilidadeIngrediente(id: number, disponivel: boolean) {
+export async function atualizarDisponibilidadeIngrediente(id: string, disponivel: boolean) {
     await pool.query(
         `UPDATE ingredientes SET disponivel = $1 WHERE id = $2`,
         [disponivel, id]

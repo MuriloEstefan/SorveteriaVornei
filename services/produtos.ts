@@ -9,7 +9,7 @@ export async function listarProdutos(categoria?: string) {
       SELECT *
       FROM produtos
       WHERE categoria = $1 AND ativo = true
-      ORDER BY id
+      ORDER BY ordem ASC
       `,
       [categoria]
     );
@@ -18,7 +18,7 @@ export async function listarProdutos(categoria?: string) {
       SELECT *
       FROM produtos
       WHERE ativo = true
-      ORDER BY categoria, id
+      ORDER BY categoria, ordem ASC
     `);
   }
 

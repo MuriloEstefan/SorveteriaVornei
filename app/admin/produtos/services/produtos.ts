@@ -24,21 +24,21 @@ export async function listarProdutos(): Promise<ProdutoAdmin[]> {
     }));
 }
 
-export async function atualizarDisponibilidade(id: number, disponivel: boolean) {
+export async function atualizarDisponibilidade(id: string, disponivel: boolean) {
     await pool.query(
         `UPDATE produtos SET disponivel = $1 WHERE id = $2`,
         [disponivel, id]
     );
 }
 
-export async function atualizarAtivo(id: number, ativo: boolean) {
+export async function atualizarAtivo(id: string, ativo: boolean) {
     await pool.query(
         `UPDATE produtos SET ativo = $1 WHERE id = $2`,
         [ativo, id]
     );
 }
 
-export async function atualizarPreco(id: number, preco: number) {
+export async function atualizarPreco(id: string, preco: number) {
     await pool.query(
         `UPDATE produtos SET preco = $1 WHERE id = $2`,
         [preco, id]

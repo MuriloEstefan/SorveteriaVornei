@@ -1,7 +1,7 @@
 export type TipoIngrediente = "sabor" | "acompanhamento";
 
 export type Ingrediente = {
-    id: number;
+    id: string;
     tipo: TipoIngrediente;
     nome: string;
     disponivel: boolean;

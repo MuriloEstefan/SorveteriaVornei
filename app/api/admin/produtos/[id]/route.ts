@@ -10,10 +10,9 @@ export async function PATCH(
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id: idParam } = await params;
-        const id = Number(idParam);
+        const { id } = await params;
 
-        if (Number.isNaN(id)) {
+        if (!id) {
             return NextResponse.json(
                 { erro: "ID inválido" },
                 { status: 400 }

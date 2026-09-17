@@ -79,7 +79,8 @@ export type ItemPedidoBanco = {
 };
 
 export type PedidoBanco = {
-    id: number;
+    id: string;
+    numero_pedido: number;
     nome: string;
     sobrenome: string;
     telefone: string;
@@ -111,7 +112,8 @@ export type StatusFiltroHistorico = "todos" | "finalizado" | "cancelado";
 export type PeriodoFiltroHistorico = "hoje" | "semana" | "mes" | "ano";
 
 export type PedidoResumoHistorico = {
-    id: number;
+    id: string;
+    numero_pedido: number;
     nome: string;
     sobrenome: string;
     telefone: string;

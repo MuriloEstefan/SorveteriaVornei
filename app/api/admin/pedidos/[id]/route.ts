@@ -6,10 +6,9 @@ export async function GET(
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id: idParam } = await params;
-        const id = Number(idParam);
+        const { id } = await params;
 
-        if (Number.isNaN(id)) {
+        if (!id) {
             return NextResponse.json({ erro: "ID inválido" }, { status: 400 });
         }
 
@@ -45,6 +44,7 @@ export async function GET(
 
         return NextResponse.json({
             id: p.id,
+            numero_pedido: p.numero_pedido,
             nome: p.nome,
             sobrenome: p.sobrenome,
             telefone: p.telefone,
@@ -75,10 +75,9 @@ export async function PATCH(
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id: idParam } = await params;
-        const id = Number(idParam);
+        const { id } = await params;
 
-        if (Number.isNaN(id)) {
+        if (!id) {
             return NextResponse.json({ erro: "ID inválido" }, { status: 400 });
         }
 

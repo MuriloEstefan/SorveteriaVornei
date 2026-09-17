@@ -53,7 +53,7 @@ export default function ModalDetalhesPedido({
                     <>
                         <div className="p-5 border-b border-white/5 flex items-center justify-between">
                             <div>
-                                <h2 className="text-xl font-bold text-white">Pedido #{pedido.id}</h2>
+                                <h2 className="text-xl font-bold text-white">Pedido #{pedido.numero_pedido}</h2>
                                 <p className="text-zinc-400 text-sm">
                                     {pedido.nome} {pedido.sobrenome} · {pedido.telefone}
                                 </p>

@@ -1,6 +1,6 @@
 // types/produto.ts
 export type ProdutoAdmin = {
-    id: number;
+    id: string;
     categoria: string;
     nome: string;
     descricao: string;

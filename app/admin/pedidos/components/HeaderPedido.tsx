@@ -25,7 +25,7 @@ export default function HeaderPedido({
     return(
         <div className="flex items-center justify-between px-5 py-3 bg-[#221a35] border-b border-white/5">
             <div className="flex items-center gap-3">
-                <span className="text-white/30 text-xs font-mono">#{pedido.id}</span>
+                <span className="text-white/30 text-xs font-mono">#{pedido.numero_pedido}</span>
                 <span className={`text-xs font-bold px-3 py-1 rounded-full ${configBase?.cor ?? "bg-white/10 text-white"}`}>
                     {labelExibido}
                     </span>

@@ -5,7 +5,7 @@ import { PedidoResumoHistorico } from "@/types/pedidos";
 interface ListaPedidosHistoricoProps {
     pedidos: PedidoResumoHistorico[];
     carregando: boolean;
-    onSelecionar: (id: number) => void;
+    onSelecionar: (id: string) => void;
 }
 
 function formatarMoeda(valor: number) {
@@ -44,7 +44,7 @@ export default function ListaPedidosHistorico({
                     >
                         <div className="flex items-center justify-between">
                             <div>
-                                <h2 className="text-xl font-bold text-white">Pedido #{pedido.id}</h2>
+                                <h2 className="text-xl font-bold text-white">Pedido #{pedido.numero_pedido}</h2>
                                 <p className="text-zinc-400">{pedido.nome} {pedido.sobrenome}</p>
                                 <p className="text-sm text-zinc-500">{formatarData(pedido.criado_em)}</p>
                             </div>
