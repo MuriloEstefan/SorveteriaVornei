@@ -17,13 +17,12 @@ export default function ListaProdutos({
     carregando, // NOVO
 }: ListaProdutosProps) {
 
-    // NOVO: enquanto carrega, mostra 4 cards "esqueleto" pulsando
     if (carregando) {
         return (
             <div className="mt-4 grid grid-cols-2 gap-3">
                 {Array.from({ length: 4 }).map((_, i) => (
-                    <div key={i} className="bg-[#2b2340] rounded-2xl overflow-hidden animate-pulse">
-                        <div className="bg-[#3a2f5c] flex items-center justify-center py-4 px-3">
+                    <div key={i} className="bg-[#3d1f52] rounded-2xl overflow-hidden animate-pulse">
+                        <div className="bg-[#5a2a72] flex items-center justify-center py-4 px-3">
                             <div className="w-20 h-20 rounded-full bg-white/10" />
                         </div>
                         <div className="p-3 space-y-2">
@@ -51,7 +50,7 @@ export default function ListaProdutos({
                             setPedidoSelecionado(item);
                         }}
                         className={`
-                            bg-[#2b2340]
+                            bg-[#3d1f52]
                             rounded-2xl
                             overflow-hidden
                             transition-all
@@ -63,7 +62,7 @@ export default function ListaProdutos({
                             }
                         `}
                     >
-                        <div className="bg-[#3a2f5c] flex items-center justify-center py-4 px-3 relative">
+                        <div className="bg-[#5a2a72] flex items-center justify-center py-4 px-3 relative">
                             <Image
                                 src={item.imagem}
                                 alt={item.nome}

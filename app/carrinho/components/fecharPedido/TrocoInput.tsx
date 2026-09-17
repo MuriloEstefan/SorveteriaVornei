@@ -17,7 +17,7 @@ export default function TrocoInput({ trocoPara, setTrocoPara }: Props) {
                 className="
                     w-full bg-white/5 border border-white/10
                     rounded-xl p-4 text-white outline-none
-                    placeholder:text-white/30 focus:border-purple-500/50 transition
+                    placeholder:text-white/30 focus:border-[#8b2e9e]/50 transition
                 "
             />
         </div>

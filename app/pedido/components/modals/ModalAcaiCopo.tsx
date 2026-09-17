@@ -1,12 +1,11 @@
 "use client";
 
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ShoppingBag } from "lucide-react";
 import { Produto, ItemCarrinho } from "@/types/pedidos";
 import { toast } from "react-toastify";
 import { buscarConfigAcai } from "../../data/acaiCopoConfig";
 import { useMontagemSobremesa } from "../../hooks/useMontagemSobremesa";
 import GrupoOpcoes from "../GrupoOpcoes";
-import BotaoAdicionarCarrinho from "../BotaoAdicionarAoCarrinho";
 import { useIngredientesDisponiveis } from "../../hooks/useIngredientesDisponiveis";
 
 interface ModalAcaiCopoProps {
@@ -41,6 +40,8 @@ export default function ModalAcaiCopo({
         fechar();
     };
 
+    const precoFinal = produto.preco_unitario + totalExtra;
+
     const tentarAdicionar = () => {
         if (config) {
             for (const grupo of config.grupos) {
@@ -69,9 +70,9 @@ export default function ModalAcaiCopo({
         adicionarAoCarrinho({
             categoria: "Açaí no Copo",
             nome: produto.nome,
-            preco_unitario: produto.preco_unitario + totalExtra,
+            preco_unitario: precoFinal,
             quantidade: 1,
-            subtotal: (produto.preco_unitario + totalExtra) * 1,
+            subtotal: precoFinal * 1,
             quantidades,
         });
 
@@ -86,9 +87,9 @@ export default function ModalAcaiCopo({
 
     return (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-            <div className="bg-[#1f1933] w-[90%] max-w-md max-h-[85vh] rounded-2xl relative flex flex-col">
+            <div className="bg-[#2e1740] w-[90%] max-w-md max-h-[85vh] rounded-2xl relative flex flex-col">
 
-                <div className="sticky top-0 z-10 flex items-center gap-3 bg-[#1f1933] border-b border-white/5 px-4 py-4 rounded-t-2xl">
+                <div className="sticky top-0 z-10 flex items-center gap-3 bg-[#2e1740] border-b border-white/5 px-4 py-4 rounded-t-2xl">
                     <button
                         onClick={fecharModal}
                         className="w-10 h-10 shrink-0 flex items-center justify-center text-white bg-white/10 rounded-full hover:bg-white/20 active:scale-90 transition cursor-pointer"
@@ -116,12 +117,32 @@ export default function ModalAcaiCopo({
                     ))}
                 </div>
 
-                <div className="sticky bottom-0 bg-[#1f1933] border-t border-white/5 p-4 rounded-b-2xl">
-                    <BotaoAdicionarCarrinho
+                <div className="sticky bottom-0 bg-[#2e1740] border-t border-white/5 p-4 rounded-b-2xl">
+                    <button
                         onClick={tentarAdicionar}
-                        preco={produto.preco_unitario + totalExtra}
-                        ativado={true}
-                    />
+                        className="
+                            w-full
+                            bg-[#8b2e9e]
+                            hover:bg-[#a83bc2]
+                            active:scale-[0.98]
+                            transition-all
+                            rounded-full
+                            py-4
+                            px-6
+                            flex
+                            items-center
+                            justify-between
+                            cursor-pointer
+                        "
+                    >
+                        <span className="flex items-center gap-2 text-white font-semibold">
+                            <ShoppingBag size={18} />
+                            Adicionar
+                        </span>
+                        <span className="text-white font-bold">
+                            R$ {precoFinal.toFixed(2).replace(".", ",")}
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>

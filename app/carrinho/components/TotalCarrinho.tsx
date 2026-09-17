@@ -14,7 +14,7 @@ export default function TotalCarrinho({
 }: TotalCarrinhoProps) {
 
     return (
-        <div className="bg-[#2b2340] rounded-2xl p-5 shadow-lg mt-6">
+        <div className="bg-[#3d1f52] rounded-2xl p-5 shadow-lg mt-6">
 
             <div className="flex items-center justify-between">
 

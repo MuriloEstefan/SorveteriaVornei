@@ -63,10 +63,10 @@ export default function GrupoOpcoes({
                                     px-4 py-3 rounded-2xl border transition text-left
                                     ${
                                         selecionado
-                                            ? "bg-purple-600/20 border-purple-500 text-white"
+                                            ? "bg-[#8b2e9e]/20 border-[#8b2e9e] text-white"
                                             : bloqueado
-                                                ? "bg-[#2b2340]/50 border-transparent text-white/30 opacity-40 cursor-not-allowed"
-                                                : "bg-[#2b2340] border-transparent text-white/90 hover:border-[#5b5470] hover:bg-[#3a2f5c] cursor-pointer"
+                                                ? "bg-[#3d1f52]/50 border-transparent text-white/30 opacity-40 cursor-not-allowed"
+                                                : "bg-[#3d1f52] border-transparent text-white/90 hover:border-[#8b2e9e] hover:bg-[#5a2a72] cursor-pointer"
                                     }
                                 `}
                             >
@@ -86,7 +86,7 @@ export default function GrupoOpcoes({
 
                                 <span
                                     className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 ${
-                                        selecionado ? "bg-purple-500 border-purple-500" : "border-white/20"
+                                        selecionado ? "bg-[#8b2e9e] border-[#8b2e9e]" : "border-white/20"
                                     }`}
                                 >
                                     {selecionado && <Check size={14} className="text-white" />}
@@ -112,10 +112,10 @@ export default function GrupoOpcoes({
                                     px-4 py-3 rounded-2xl border transition
                                     ${
                                         selecionado
-                                            ? "bg-[#3a2f5c] border-purple-500/40"
+                                            ? "bg-[#5a2a72] border-[#8b2e9e]/40"
                                             : bloqueado
-                                                ? "bg-[#2b2340]/50 border-transparent opacity-40"
-                                                : "bg-[#2b2340] border-transparent"
+                                                ? "bg-[#3d1f52]/50 border-transparent opacity-40"
+                                                : "bg-[#3d1f52] border-transparent"
                                     }
                                 `}
                             >
@@ -149,7 +149,7 @@ export default function GrupoOpcoes({
                                     <button
                                         onClick={() => aumentar(grupo.chave, opcao.nome)}
                                         disabled={!podeAumentar}
-                                        className="w-9 h-9 flex items-center justify-center rounded-full bg-purple-500/20 hover:bg-purple-500/30 active:scale-90 disabled:opacity-30 disabled:hover:bg-purple-500/20 text-purple-200 text-lg font-semibold transition cursor-pointer disabled:cursor-not-allowed"
+                                        className="w-9 h-9 flex items-center justify-center rounded-full bg-[#8b2e9e]/20 hover:bg-[#8b2e9e]/30 active:scale-90 disabled:opacity-30 disabled:hover:bg-[#8b2e9e]/20 text-[#d9a8e8] text-lg font-semibold transition cursor-pointer disabled:cursor-not-allowed"
                                     >
                                         +
                                     </button>

@@ -6,7 +6,7 @@ interface ListaItensProps {
     tipo: "sorvete" | "acompanhamento";
     quantidades: Record<string, number>;
     maxItens: number;
-    disponibilidadePorNome: Record<string, boolean>; // 👈 novo
+    disponibilidadePorNome: Record<string, boolean>; 
     aumentar: (nome: string, tipo: "sorvete" | "acompanhamento") => void;
     diminuir: (nome: string) => void;
 }

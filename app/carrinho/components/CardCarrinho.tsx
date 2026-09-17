@@ -39,7 +39,7 @@ export default function CardCarrinho({
     removerItem,
 }: CardCarrinhoProps) {
     return (
-        <div className="bg-[#2b2340] rounded-2xl p-4 shadow-lg">
+        <div className="bg-[#3d1f52] rounded-2xl p-4 shadow-lg">
 
             <h3 className="text-lg font-bold text-white">
                 {nomeExibicao(item.categoria, item.nome)}
@@ -58,15 +58,15 @@ export default function CardCarrinho({
                             >
                                 {nome}
                                 {quantidade > 1 && (
-                                    <span className="text-purple-300 font-semibold"> x{quantidade}</span>
+                                    <span className="text-[#d9a8e8] font-semibold"> x{quantidade}</span>
                                 )}
                             </span>
                         ))}
                 </div>
             )}
             {item.observacao && (
-                <div className="mt-3 border-l-2 border-purple-500 pl-3">
-                    <p className="text-xs font-semibold text-purple-300 uppercase">
+                <div className="mt-3 border-l-2 border-[#8b2e9e] pl-3">
+                    <p className="text-xs font-semibold text-[#d9a8e8] uppercase">
                         Observação
                     </p>
 
@@ -88,7 +88,7 @@ export default function CardCarrinho({
                     w-9
                     h-9
                     rounded-xl
-                    bg-[#221a35]
+                    bg-[#2e1740]
                     hover:bg-red-500/10
                     border
                     border-white/5

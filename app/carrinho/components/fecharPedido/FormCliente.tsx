@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ShieldCheck } from "lucide-react";
 import { toast } from "react-toastify";
 
 type Props = {
@@ -29,7 +29,7 @@ export default function DadosCliente({ voltar, continuar }: Props) {
 
             <button
                 onClick={voltar}
-                className="mb-4 flex items-center gap-2 text-white hover:text-purple-400 transition cursor-pointer"
+                className="mb-4 flex items-center gap-2 text-white hover:text-[#d9a8e8] transition cursor-pointer"
             >
                 <ArrowLeft size={20} />
                 Voltar
@@ -44,7 +44,7 @@ export default function DadosCliente({ voltar, continuar }: Props) {
                     placeholder="Nome"
                     value={nome}
                     onChange={(e) => setNome(e.target.value)}
-                    className="w-full bg-[#2b2340] rounded-xl p-3 outline-none text-white"
+                    className="w-full bg-[#3d1f52] rounded-xl p-3 outline-none text-white"
                 />
             </div>
 
@@ -57,7 +57,7 @@ export default function DadosCliente({ voltar, continuar }: Props) {
                     placeholder="Sobrenome"
                     value={sobrenome}
                     onChange={(e) => setSobrenome(e.target.value)}
-                    className="w-full bg-[#2b2340] rounded-xl p-3 outline-none text-white"
+                    className="w-full bg-[#3d1f52] rounded-xl p-3 outline-none text-white"
                 />
             </div>
 
@@ -83,7 +83,7 @@ export default function DadosCliente({ voltar, continuar }: Props) {
 
                         setTelefone(valor);
                     }}
-                    className="w-full bg-[#2b2340] rounded-xl p-3 outline-none text-white"
+                    className="w-full bg-[#3d1f52] rounded-xl p-3 outline-none text-white"
                 />
             </div>
 
@@ -95,11 +95,11 @@ export default function DadosCliente({ voltar, continuar }: Props) {
                     placeholder="Ex: sem açúcar, capricha na calda..."
                     value={observacao}
                     onChange={(e) => setObservacao(e.target.value)}
-                    className="w-full h-28 resize-none bg-[#2b2340] rounded-xl p-3 outline-none text-white"
+                    className="w-full h-28 resize-none bg-[#3d1f52] rounded-xl p-3 outline-none text-white"
                 />
             </div>
 
-            <div className="flex items-center justify-between bg-[#2b2340] rounded-2xl p-4">
+            <div className="flex items-center justify-between bg-[#3d1f52] rounded-2xl p-4">
                 <span className="text-white">Deseja colher?</span>
                 <input
                     type="checkbox"
@@ -107,6 +107,13 @@ export default function DadosCliente({ voltar, continuar }: Props) {
                     onChange={(e) => setColher(e.target.checked)}
                     className="w-5 h-5"
                 />
+            </div>
+
+            <div className="flex items-start gap-2 px-1 pt-1">
+                <ShieldCheck size={14} className="text-white/40 shrink-0 mt-0.5" />
+                <p className="text-white/40 text-xs leading-relaxed">
+                    Seus dados são usados só para processar seu pedido e não são compartilhados com terceiros.
+                </p>
             </div>
 
             <button

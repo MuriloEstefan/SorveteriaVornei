@@ -25,8 +25,8 @@ export default function OpcoesPagamento({ formaPagamento, setFormaPagamento }: P
                         className={`
                             w-full flex items-center justify-between
                             rounded-2xl p-4 border transition text-white
-                            ${selecionado
-                                ? "bg-purple-600/20 border-purple-500"
+                           ${selecionado
+                                ? "bg-[#8b2e9e]/20 border-[#8b2e9e]"
                                 : "bg-white/5 border-white/10 hover:bg-white/10"
                             }
                         `}
@@ -34,7 +34,7 @@ export default function OpcoesPagamento({ formaPagamento, setFormaPagamento }: P
                         <div className="flex items-center gap-3">
                             <div className={`
                                 w-10 h-10 rounded-full flex items-center justify-center transition
-                                ${selecionado ? "bg-purple-600" : "bg-white/10"}
+                                ${selecionado ? "bg-[#8b2e9e]" : "bg-white/10"}
                             `}>
                                 <Icone size={18} className="text-white" />
                             </div>
@@ -42,7 +42,7 @@ export default function OpcoesPagamento({ formaPagamento, setFormaPagamento }: P
                         </div>
 
                         {selecionado && (
-                            <div className="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center">
+                            <div className="w-6 h-6 rounded-full bg-[#8b2e9e] flex items-center justify-center">
                                 <Check size={14} className="text-white" />
                             </div>
                         )}

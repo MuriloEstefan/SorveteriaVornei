@@ -31,10 +31,10 @@ export default function ItemQuantidade({
             transition
             ${
                 selecionado
-                    ? "bg-[#3a2f5c] border-purple-500/40"
+                    ? "bg-[#5a2a72] border-[#8b2e9e]/40"
                     : bloqueado
-                        ? "bg-[#2b2340]/50 border-transparent opacity-40"
-                        : "bg-[#2b2340] border-transparent hover:border-[#5b5470] hover:bg-[#3a2f5c]"
+                        ? "bg-[#3d1f52]/50 border-transparent opacity-40"
+                        : "bg-[#3d1f52] border-transparent hover:border-[#8b2e9e] hover:bg-[#5a2a72]"
             }
             `}
         >
@@ -65,7 +65,7 @@ export default function ItemQuantidade({
                 <button
                     onClick={() => aumentar(nome, tipo)}
                     disabled={!podeAumentar || !disponivel}
-                    className="w-10 h-10 flex items-center justify-center rounded-full bg-purple-500/20 hover:bg-purple-500/30 active:scale-90 disabled:opacity-30 disabled:hover:bg-purple-500/20 text-purple-200 text-lg font-semibold transition cursor-pointer disabled:cursor-not-allowed"
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-[#8b2e9e]/20 hover:bg-[#8b2e9e]/30 active:scale-90 disabled:opacity-30 disabled:hover:bg-[#8b2e9e]/20 text-[#d9a8e8] text-lg font-semibold transition cursor-pointer disabled:cursor-not-allowed"
                 >
                     +
                 </button>

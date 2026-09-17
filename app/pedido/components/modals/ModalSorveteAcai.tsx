@@ -1,14 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ShoppingBag } from "lucide-react";
 import { Props } from "@/types/pedidos";
 import { toast } from "react-toastify";
 import { sabores } from "../../data/sabores";
 import { acompanhamentos } from "../../data/acompanhamentos";
 import ListaItens from "../ListaItens";
 import { useMontagemPedido } from "../../hooks/useMontagemPedido";
-import BotaoAdicionarCarrinho from "../BotaoAdicionarAoCarrinho";
 import { useIngredientesDisponiveis } from "../../hooks/useIngredientesDisponiveis";
 
 export default function ModalSorveteAcai({pedido, fechar, adicionarAoCarrinho}: Props) {
@@ -92,9 +91,9 @@ export default function ModalSorveteAcai({pedido, fechar, adicionarAoCarrinho}: 
 
     return(
        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-         <div className="bg-[#1f1933] w-[90%] max-w-md max-h-[85vh] rounded-2xl relative flex flex-col">
+         <div className="bg-[#2e1740] w-[90%] max-w-md max-h-[85vh] rounded-2xl relative flex flex-col">
 
-            <div className="sticky top-0 z-10 flex items-center gap-3 bg-[#1f1933] border-b border-white/5 px-4 py-4 rounded-t-2xl">
+            <div className="sticky top-0 z-10 flex items-center gap-3 bg-[#2e1740] border-b border-white/5 px-4 py-4 rounded-t-2xl">
                 <button
                     onClick={fecharModal}
                     className="
@@ -140,17 +139,37 @@ export default function ModalSorveteAcai({pedido, fechar, adicionarAoCarrinho}: 
                 />
             </div>
 
-            <div className="sticky bottom-0 bg-[#1f1933] border-t border-white/5 p-4 rounded-b-2xl">
-               <BotaoAdicionarCarrinho
+            <div className="sticky bottom-0 bg-[#2e1740] border-t border-white/5 p-4 rounded-b-2xl">
+                <button
                     onClick={tentarAdicionar}
-                    preco={pedido.preco_unitario}
-                    ativado={true}
-                />
+                    className="
+                        w-full
+                        bg-[#8b2e9e]
+                        hover:bg-[#a83bc2]
+                        active:scale-[0.98]
+                        transition-all
+                        rounded-full
+                        py-4
+                        px-6
+                        flex
+                        items-center
+                        justify-between
+                        cursor-pointer
+                    "
+                >
+                    <span className="flex items-center gap-2 text-white font-semibold">
+                        <ShoppingBag size={18} />
+                        Adicionar
+                    </span>
+                    <span className="text-white font-bold">
+                        R$ {pedido.preco_unitario.toFixed(2).replace(".", ",")}
+                    </span>
+                </button>
             </div>
 
             {avisos.length > 0 && (
                 <div className="absolute inset-0 bg-black/70 rounded-2xl flex items-center justify-center p-6 z-20">
-                    <div className="bg-[#2b2340] rounded-2xl p-5 w-full max-w-sm border border-white/10">
+                    <div className="bg-[#3d1f52] rounded-2xl p-5 w-full max-w-sm border border-white/10">
                         <p className="text-white font-semibold text-base mb-2">
                             Pedido incompleto
                         </p>
@@ -184,7 +203,7 @@ export default function ModalSorveteAcai({pedido, fechar, adicionarAoCarrinho}: 
                                 onClick={finalizarPedido}
                                 className="
                                     flex-1 py-3 rounded-xl
-                                    bg-purple-600 hover:bg-purple-500
+                                    bg-[#8b2e9e] hover:bg-[#a83bc2]
                                     text-white text-sm font-semibold
                                     transition cursor-pointer
                                 "

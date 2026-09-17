@@ -12,10 +12,10 @@ export default function Hero() {
                     alt="Banner Vornei"
                     fill
                     priority
-                    className="object-cover object-center opacity-20"
+                    className="object-cover object-[68%_center] md:object-center opacity-50 md:opacity-20"
                 />
                 {/* gradiente de baixo pra fundir com próxima seção */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[#0e0818]/60 via-transparent to-[#0e0818]" />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#0e0818]/40 md:from-[#0e0818]/60 via-transparent to-[#0e0818]" />
             </div>
 
             {/* Conteúdo */}

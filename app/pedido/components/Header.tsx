@@ -12,7 +12,7 @@ export default function Header({ titulo }: Props) {
     return(
         <main className="w-full text-white px-1 ">
 
-            <header className="bg-[#2b2340] rounded-2xl py-3 pr-4 flex items-center justify-between shadow-lg gap-2">
+            <header className="bg-[#3d1f52] rounded-2xl py-3 pr-4 flex items-center justify-between shadow-lg gap-2">
                 <Link href="/pedido" className="flex items-center min-w-0 -ml-2">
                    <Image
                      src="/imagens/Logo/LogoVorneiSemFundo.png"
@@ -35,10 +35,10 @@ export default function Header({ titulo }: Props) {
                 <Link
                     href="/carrinho"
                     className="
-                        bg-[#3a2f5c]
+                        bg-[#5a2a72]
                         p-3
                         rounded-full
-                        hover:bg-[#4b3d74]
+                        hover:bg-[#7a2c8e]
                         transition-colors
                         duration-200
                         shrink-0

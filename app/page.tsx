@@ -6,12 +6,14 @@ import Footer from "@/app/home/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[var(--cor-fundo)] text-white px-4 py-4">
+    <main className="min-h-screen bg-[var(--cor-fundo)] text-white">
       <Header />
-      <Hero />
-      <Milkshakes />
-      <Localizacao />
-      <Footer />
+      <div className="pt-[88px]">
+        <Hero />
+        <Milkshakes />
+        <Localizacao />
+        <Footer />
+      </div>
     </main>
   );
 }

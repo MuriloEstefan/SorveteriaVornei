@@ -119,7 +119,7 @@ export default function EscolhaPagamento({
 
         <button
             onClick={voltar}
-            className="flex items-center gap-2 text-white/70 hover:text-purple-400 transition text-sm"
+            className="flex items-center gap-2 text-white/70 hover:text-[#d9a8e8] transition text-sm"
         >
             <ArrowLeft size={18}/>
             Voltar
@@ -156,7 +156,7 @@ export default function EscolhaPagamento({
 
                             ${
                                 selecionado
-                                    ? "bg-purple-600/20 border-purple-500"
+                                    ? "bg-[#8b2e9e]/20 border-[#8b2e9e]"
                                     : "bg-white/5 border-white/10 hover:bg-white/10"
                             }
                         `}
@@ -173,7 +173,7 @@ export default function EscolhaPagamento({
 
                                 ${
                                     selecionado
-                                        ? "bg-purple-600"
+                                        ? "bg-[#8b2e9e]"
                                         : "bg-white/10"
                                 }
                             `}>
@@ -185,7 +185,7 @@ export default function EscolhaPagamento({
                         </div>
 
                         {selecionado && (
-                            <div className="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center">
+                            <div className="w-6 h-6 rounded-full bg-[#8b2e9e] flex items-center justify-center">
                                 <Check size={14} className="text-white" />
                             </div>
                         )}
@@ -213,7 +213,7 @@ export default function EscolhaPagamento({
                         text-white
                         outline-none
                         placeholder:text-white/30
-                        focus:border-purple-500/50
+                        focus:border-[#8b2e9e]/50
                         transition
                     "
                 />

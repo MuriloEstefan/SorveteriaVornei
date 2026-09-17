@@ -40,18 +40,18 @@ export default function SeletorBairro({ cidade, bairro, onSelect }: Props) {
                 type="button"
                 onClick={() => setAberto((v) => !v)}
                 className="
-                    w-full
-                    flex
-                    items-center
-                    justify-between
-                    py-3
-                    px-4
-                    rounded-xl
-                    bg-[#2b2340]
-                    border border-white/10
-                    text-left
-                    transition
-                    hover:bg-[#3a2f5c]
+                        w-full
+                        flex
+                        items-center
+                        justify-between
+                        py-3
+                        px-4
+                        rounded-xl
+                        bg-[#3d1f52]
+                        border border-white/10
+                        text-left
+                        transition
+                        hover:bg-[#5a2a72]
                 "
             >
                 <div>
@@ -87,7 +87,7 @@ export default function SeletorBairro({ cidade, bairro, onSelect }: Props) {
                         w-full
                         max-h-60
                         overflow-y-auto
-                        bg-[#2b2340]
+                        bg-[#3d1f52]
                         border border-white/10
                         rounded-xl
                         shadow-xl
@@ -116,8 +116,8 @@ export default function SeletorBairro({ cidade, bairro, onSelect }: Props) {
                                     transition
                                     ${
                                         selecionado
-                                            ? "bg-purple-600 text-white"
-                                            : "text-white/70 hover:bg-[#3a2f5c]"
+                                            ? "bg-[#8b2e9e] text-white"
+                                            : "text-white/70 hover:bg-[#5a2a72]"
                                     }
                                 `}
                             >

@@ -22,8 +22,8 @@ export default function SeletorCidade({ cidade, onSelect }: Props) {
                             className={`
                                 py-3 rounded-xl text-sm font-semibold transition border
                                 ${selecionado
-                                    ? "bg-purple-600 border-purple-500 text-white"
-                                    : "bg-[#2b2340] border-transparent text-white/70 hover:bg-[#3a2f5c]"
+                                    ? "bg-[#8b2e9e] border-[#a83bc2] text-white"
+                                    : "bg-[#3d1f52] border-transparent text-white/70 hover:bg-[#5a2a72]"
                                 }
                             `}
                         >

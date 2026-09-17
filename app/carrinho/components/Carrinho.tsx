@@ -24,7 +24,7 @@ const totalPedidos = carrinho.reduce((total, item) => {
         <div className="mt-8 space-y-4">
 
             {carrinho.length === 0 ? (
-                <div className="bg-[#2b2340] p-6 rounded-2xl text-center text-white/70">
+                <div className="bg-[#3d1f52] p-6 rounded-2xl text-center text-white/70">
                     Seu carrinho está vazio
                 </div>
             ) : (

@@ -70,7 +70,7 @@ export default function FecharCarrinho({carrinho, totalPedidos, finalizarCompra}
                 shadow-lg
                 ${
                     lojaAberta
-                        ? "bg-purple-600 hover:bg-purple-500 cursor-pointer"
+                        ? "bg-[#8b2e9e] hover:bg-[#a83bc2] cursor-pointer"
                         : "bg-white/10 cursor-not-allowed opacity-60"
                 }
                 `}

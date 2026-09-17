@@ -59,8 +59,8 @@ export default function EscolhaEntrega({
                         border
                         ${
                             tipoEntrega === "retirada"
-                                ? "bg-purple-600 border-purple-500"
-                                : "bg-[#2b2340] border-transparent"
+                                ? "bg-[#8b2e9e] border-[#a83bc2]"
+                                : "bg-[#3d1f52] border-transparent"
                         }
                     `}
                 >
@@ -79,8 +79,8 @@ export default function EscolhaEntrega({
                         border
                         ${
                             tipoEntrega === "entrega"
-                                ? "bg-purple-600 border-purple-500"
-                                : "bg-[#2b2340] border-transparent"
+                                ? "bg-[#8b2e9e] border-[#a83bc2]"
+                                : "bg-[#3d1f52] border-transparent"
                         }
                     `}
                 >

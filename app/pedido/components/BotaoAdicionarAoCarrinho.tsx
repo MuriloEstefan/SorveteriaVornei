@@ -17,8 +17,8 @@ export default function BotaoAdicionarCarrinho({
             disabled={!ativado}
             className="
                 w-full
-                bg-gradient-to-r from-purple-600 to-purple-500
-                hover:from-purple-500 hover:to-purple-400
+                bg-gradient-to-r from-[#8b2e9e] to-[#a83bc2]
+                hover:from-[#a83bc2] hover:to-[#c04dd9]
                 disabled:from-white/10
                 disabled:to-white/10
                 disabled:cursor-not-allowed

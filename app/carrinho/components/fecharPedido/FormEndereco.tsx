@@ -65,7 +65,7 @@ export default function FormEndereco({
                     placeholder="Rua"
                     value={rua}
                     onChange={(e) => setRua(e.target.value)}
-                    className="w-full bg-[#2b2340] rounded-xl p-3 outline-none text-white"
+                    className="w-full bg-[#3d1f52] rounded-xl p-3 outline-none text-white"
                 />
             </div>
 
@@ -78,7 +78,7 @@ export default function FormEndereco({
                     placeholder="Número"
                     value={numero}
                     onChange={(e) => setNumero(e.target.value)}
-                    className="w-full bg-[#2b2340] rounded-xl p-3 outline-none text-white"
+                    className="w-full bg-[#3d1f52] rounded-xl p-3 outline-none text-white"
                 />
             </div>
 
@@ -91,7 +91,7 @@ export default function FormEndereco({
                     placeholder="Complemento"
                     value={complemento}
                     onChange={(e) => setComplemento(e.target.value)}
-                    className="w-full bg-[#2b2340] rounded-xl p-3 outline-none text-white"
+                    className="w-full bg-[#3d1f52] rounded-xl p-3 outline-none text-white"
                 />
             </div>
 

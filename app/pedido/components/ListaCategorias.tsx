@@ -33,14 +33,14 @@ export default function ListaCategoria({
                                 categoriaSelecionada === categoria.nome ? "" : categoria.nome
                             )
                         }}
-                        className="bg-[#2b2340] rounded-2xl p-4 flex items-center justify-between shadow-lg cursor-pointer border border-transparent hover:border-[#5b5470] transition"
+                        className="bg-[#3d1f52] rounded-2xl p-4 flex items-center justify-between shadow-lg cursor-pointer border border-transparent hover:border-[#8b2e9e] transition"
                     >
                         <div>
                             <h3 className="text-xl font-bold">{categoria.nome}</h3>
                             <p className="text-sm text-gray-300">{categoria.descricao}</p>
                         </div>
 
-                        <div className="bg-[#3a2f5c] p-3 rounded-full">
+                        <div className="bg-[#5a2a72] p-3 rounded-full">
                             <ChevronDown
                                 size={26}
                                 className={`transition-transform duration-300 ${
