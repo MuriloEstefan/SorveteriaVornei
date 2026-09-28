@@ -51,7 +51,7 @@ export default function Localizacao() {
                 >
                     <div className="w-40 h-40 rounded-full overflow-hidden border-2 border-[#6ddc8b]/30 shadow-xl transition-transform duration-300 group-hover:scale-105 group-hover:border-[#6ddc8b]">
                         <Image
-                            src="/imagens/Logo/LogoVornei.jfif"
+                            src="/imagens/Logo/logoVornei.png"
                             alt="Vornei Lanchonete e Sorveteria"
                             width={160}
                             height={160}
