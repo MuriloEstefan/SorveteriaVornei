@@ -1,7 +1,15 @@
 import { pool } from "@/lib/db";
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { verificarSessao } from "@/lib/sessao";
 
 export async function GET() {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("sessao_admin")?.value;
+
+    if (!token || !(await verificarSessao(token))) {
+        return NextResponse.json({ erro: "Não autorizado" }, { status: 401 });
+    }
 
     // Busca só os pedidos que ainda precisam de alguma ação
     // (entregue/cancelado não aparecem mais aqui)
@@ -26,13 +34,13 @@ export async function GET() {
                 nome: pedido.nome,
                 sobrenome: pedido.sobrenome,
                 telefone: pedido.telefone,
-                tipo_entrega: pedido.tipo_pedido, 
+                tipo_entrega: pedido.tipo_pedido,
                 rua: pedido.rua,
                 numero: pedido.numero,
                 bairro: pedido.bairro,
                 complemento: pedido.complemento,
-                cidade: pedido.cidade,             
-                frete: Number(pedido.frete ?? 0),  
+                cidade: pedido.cidade,
+                frete: Number(pedido.frete ?? 0),
                 observacao: pedido.observacao,
                 colher: pedido.colher,
                 forma_pagamento: pedido.forma_pagamento,

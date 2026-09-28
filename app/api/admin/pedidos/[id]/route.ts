@@ -1,10 +1,14 @@
 import { pool } from "@/lib/db";
 import { NextResponse } from "next/server";
+import { exigirAdmin } from "@/lib/verificarAdmin";
 
 export async function GET(
     req: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
+    const erroAuth = await exigirAdmin();
+    if (erroAuth) return erroAuth;
+
     try {
         const { id } = await params;
 
@@ -74,6 +78,9 @@ export async function PATCH(
     req: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
+    const erroAuth = await exigirAdmin();
+    if (erroAuth) return erroAuth;
+
     try {
         const { id } = await params;
 

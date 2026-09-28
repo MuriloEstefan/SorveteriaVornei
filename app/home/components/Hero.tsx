@@ -3,20 +3,20 @@ import Link from 'next/link';
 
 export default function Hero() {
     return (
-        <section id="home" className="w-full min-h-[100svh] bg-transparent relative flex items-center overflow-hidden">
+       <section id="home" className="w-full min-h-[100svh] bg-[#0e0818] relative flex items-center overflow-hidden">
 
-            {/* Fundo com imagem escurecida */}
-            <div className="absolute inset-0">
-                <Image
-                    src="/imagens/Copo/CopoVorneiMenor.jpeg"
-                    alt="Banner Vornei"
-                    fill
-                    priority
-                    className="object-cover object-[68%_center] md:object-center opacity-50 md:opacity-20"
-                />
-                {/* gradiente de baixo pra fundir com próxima seção */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[#0e0818]/40 md:from-[#0e0818]/60 via-transparent to-[#0e0818]" />
-            </div>
+        {/* Fundo com imagem escurecida */}
+        <div className="absolute inset-0">
+            <Image
+                src="/imagens/Copo/CopoVorneiMenor.jpeg"
+                alt="Banner Vornei"
+                fill
+                priority
+                className="object-cover object-[68%_center] md:object-center opacity-50 md:opacity-20 z-0"
+            />
+            {/* gradiente de baixo pra fundir com próxima seção */}
+            <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#0e0818] via-[#0e0818]/40 to-[#0e0818]" />
+        </div>
 
             {/* Conteúdo */}
             <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-12 items-center">

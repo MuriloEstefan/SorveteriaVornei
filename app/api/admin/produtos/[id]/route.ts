@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { verificarSessao } from "@/lib/sessao";
 import {
     atualizarDisponibilidade,
     atualizarAtivo,
@@ -9,6 +11,17 @@ export async function PATCH(
     req: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
+    // Confere se quem tá chamando essa rota está logado
+    const cookieStore = await cookies();
+    const token = cookieStore.get("sessao_admin")?.value;
+
+    if (!token || !(await verificarSessao(token))) {
+        return NextResponse.json(
+            { erro: "Não autorizado" },
+            { status: 401 }
+        );
+    }
+
     try {
         const { id } = await params;
 

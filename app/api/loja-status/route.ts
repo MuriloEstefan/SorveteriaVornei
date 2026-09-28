@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
+import { exigirAdmin } from "@/lib/verificarAdmin";
 import { buscarLojaAberta, alterarLojaAberta } from "@/lib/configuracoesLojaAberta";
 
-export const dynamic = "force-dynamic"; // 👈 novo: impede cache estático da rota
+export const dynamic = "force-dynamic";
 
 export async function GET() {
     try {
@@ -14,6 +15,9 @@ export async function GET() {
 }
 
 export async function PATCH(req: Request) {
+    const erroAuth = await exigirAdmin();
+    if (erroAuth) return erroAuth;
+
     try {
         const { aberta } = await req.json();
 

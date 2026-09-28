@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
-import bcrypt from "bcrypt";
+import { createClient } from "@supabase/supabase-js";
 import { criarSessao } from "@/lib/sessao";
 import { verificarBloqueio, registrarTentativaFalha, resetarTentativas } from "@/lib/rateLimiter";
+
+const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 export async function POST(req: Request) {
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "desconhecido";
@@ -14,17 +19,17 @@ export async function POST(req: Request) {
         );
     }
 
-    const { senha } = await req.json();
+    const { email, senha } = await req.json();
 
-    const hashSalvo = process.env.ADMIN_PASSWORD_HASH!;
-    const senhaCorreta = await bcrypt.compare(senha, hashSalvo);
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password: senha,
+    });
 
-    console.log('recebido:', senha, 'hash:', hashSalvo);
-
-    if (!senhaCorreta) {
+    if (error) {
         await registrarTentativaFalha(ip);
         return NextResponse.json(
-            { erro: "Senha incorreta" },
+            { erro: "E-mail ou senha incorretos" },
             { status: 401 }
         );
     }
@@ -39,7 +44,7 @@ export async function POST(req: Request) {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
-        maxAge: 60 * 60 * 24 * 7, // 7 dias em segundos
+        maxAge: 60 * 60 * 24 * 7,
         path: "/",
     });
 

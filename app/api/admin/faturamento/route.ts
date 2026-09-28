@@ -1,34 +1,30 @@
 import { NextResponse } from "next/server";
+import { exigirAdmin } from "@/lib/verificarAdmin";
 import {
     buscarResumo,
     buscarFaturamentoPorDia,
     buscarProdutosMaisVendidos,
 } from "@/app/admin/faturamento/services/faturamento";
 
-const TIMEZONE_OFFSET = "-03:00"; // horário de Brasília (sem horário de verão)
+const TIMEZONE_OFFSET = "-03:00";
 
-// Retorna a data de "hoje" no fuso de Brasília, no formato "YYYY-MM-DD",
-// independente do fuso horário em que o servidor está rodando.
 function hojeNoBrasil(): string {
     const agora = new Date();
-    // Intl.DateTimeFormat com timeZone força a conversão pro fuso certo
     const formatter = new Intl.DateTimeFormat("en-CA", {
         timeZone: "America/Sao_Paulo",
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
     });
-    return formatter.format(agora); // "en-CA" retorna no formato YYYY-MM-DD
+    return formatter.format(agora);
 }
 
-// Soma/subtrai dias de uma data no formato "YYYY-MM-DD"
 function adicionarDias(dataStr: string, dias: number): string {
     const data = new Date(`${dataStr}T00:00:00.000${TIMEZONE_OFFSET}`);
     data.setUTCDate(data.getUTCDate() + dias);
     return data.toISOString().slice(0, 10);
 }
 
-// Calcula o início/fim do período baseado no atalho escolhido (hoje, semana, mes)
 function calcularPeriodo(periodo: string, inicioCustom?: string, fimCustom?: string) {
     if (periodo === "personalizado" && inicioCustom && fimCustom) {
         const inicio = new Date(`${inicioCustom}T00:00:00.000${TIMEZONE_OFFSET}`);
@@ -36,15 +32,14 @@ function calcularPeriodo(periodo: string, inicioCustom?: string, fimCustom?: str
         return { inicio, fim };
     }
 
-    const hoje = hojeNoBrasil(); // ex: "2026-07-16"
+    const hoje = hojeNoBrasil();
 
     let inicioStr = hoje;
     if (periodo === "semana") {
-        inicioStr = adicionarDias(hoje, -6); // últimos 7 dias, incluindo hoje
+        inicioStr = adicionarDias(hoje, -6);
     } else if (periodo === "mes") {
-        inicioStr = adicionarDias(hoje, -29); // últimos 30 dias
+        inicioStr = adicionarDias(hoje, -29);
     }
-    // se for "hoje", inicio continua sendo hoje mesmo
 
     const inicio = new Date(`${inicioStr}T00:00:00.000${TIMEZONE_OFFSET}`);
     const fim = new Date(`${hoje}T23:59:59.999${TIMEZONE_OFFSET}`);
@@ -53,6 +48,9 @@ function calcularPeriodo(periodo: string, inicioCustom?: string, fimCustom?: str
 }
 
 export async function GET(req: Request) {
+    const erroAuth = await exigirAdmin();
+    if (erroAuth) return erroAuth;
+
     const { searchParams } = new URL(req.url);
 
     const periodo = searchParams.get("periodo") || "hoje";
@@ -61,7 +59,6 @@ export async function GET(req: Request) {
 
     const { inicio, fim } = calcularPeriodo(periodo, inicioCustom, fimCustom);
 
-    // Calcula o período anterior (mesmo tamanho de dias, logo antes do período atual)
     const duracaoMs = fim.getTime() - inicio.getTime();
     const fimAnterior = new Date(inicio.getTime() - 1);
     const inicioAnterior = new Date(fimAnterior.getTime() - duracaoMs);

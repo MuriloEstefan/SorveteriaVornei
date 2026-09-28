@@ -5,20 +5,21 @@ import { useRouter } from "next/navigation";
 import { Lock } from "lucide-react";
 import { toast } from "react-toastify";
 
+const EMAIL_ADMIN = "muriloestefano19@gmail.com"; // troca pelo e-mail cadastrado no Supabase Auth
+
 export default function LoginPage() {
     const [senha, setSenha] = useState("");
     const [carregando, setCarregando] = useState(false);
     const [segundosRestantes, setSegundosRestantes] = useState<number | null>(null);
     const router = useRouter();
 
-    // conta regressiva: decrementa 1 a cada segundo enquanto houver bloqueio
     useEffect(() => {
         if (segundosRestantes === null || segundosRestantes <= 0) return;
 
         const intervalo = setInterval(() => {
             setSegundosRestantes((atual) => {
                 if (atual === null) return null;
-                if (atual <= 1) return null; // zera e libera o login de novo
+                if (atual <= 1) return null;
                 return atual - 1;
             });
         }, 1000);
@@ -46,7 +47,7 @@ export default function LoginPage() {
             const resposta = await fetch("/api/admin/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ senha }),
+                body: JSON.stringify({ email: EMAIL_ADMIN, senha }),
             });
 
             const dados = await resposta.json();

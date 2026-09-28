@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
+import { exigirAdmin } from "@/lib/verificarAdmin";
 import { listarIngredientesAdmin } from "@/app/admin/ingredientes/services/ingredientes";
 
 export async function GET() {
+    const erroAuth = await exigirAdmin();
+    if (erroAuth) return erroAuth;
+
     try {
         const ingredientes = await listarIngredientesAdmin();
         return NextResponse.json(ingredientes);

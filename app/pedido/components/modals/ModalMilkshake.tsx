@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { X, ShoppingBag } from "lucide-react";
+import { X } from "lucide-react";
 import { useState } from "react";
 import { ItemCarrinho, Produto } from "@/types/pedidos";
 import { toast } from "react-toastify";
@@ -35,7 +35,7 @@ export default function ModalMilkshake({
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className="bg-[#331b48] rounded-t-3xl w-full max-w-md max-h-[90vh] overflow-y-auto animate-slide-up"
+                className="bg-[#331b48] rounded-t-3xl w-full max-w-md max-h-[90vh] overflow-y-auto animate-slide-up relative"
             >
                 {/* Barrinha de arrastar */}
                 <div className="flex justify-center pt-3">
@@ -44,68 +44,57 @@ export default function ModalMilkshake({
 
                 <button
                     onClick={fechar}
-                    className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition"
+                    className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition"
                 >
-                    <X size={18} className="text-white/60" />
+                    <X size={18} className="text-white/70" />
                 </button>
 
-                {/* Foto em mancha orgânica + etiqueta */}
-                <div className="relative flex justify-center pt-4 pb-2">
-                    <div className="relative">
-                        <div
-                            className="w-40 h-40 bg-[#f6efd9] overflow-hidden -rotate-3 shadow-[0_12px_28px_-8px_rgba(139,46,158,0.55)]"
-                            style={{ borderRadius: "42% 58% 63% 37% / 41% 44% 56% 59%" }}
-                        >
-                            <Image
-                                src={produto.imagem}
-                                alt={produto.nome}
-                                width={280}
-                                height={280}
-                                className="w-full h-full object-cover rotate-3 scale-110"
-                            />
-                        </div>
-
-                        <span className="absolute -bottom-2 -left-3 rotate-[-6deg] bg-[#f6efd9] text-[#5a2a72] text-xs font-semibold px-3 py-1 rounded-full shadow-md">
-                            Milkshake
-                        </span>
+                {/* Foto circular centralizada */}
+                <div className="flex justify-center pt-8 pb-4">
+                    <div className="w-44 h-44 rounded-full bg-white/5 overflow-hidden flex items-center justify-center">
+                        <Image
+                            src={produto.imagem}
+                            alt={produto.nome}
+                            width={200}
+                            height={200}
+                            className="w-full h-full object-cover"
+                        />
                     </div>
                 </div>
 
-                <div className="px-6 pb-6 pt-4">
+                <div className="px-6 pb-6">
 
-                    {/* Nome + descrição, alinhado como rótulo */}
-                    <div className="mb-6">
-                        <h2
-                            className="text-white text-3xl leading-tight"
-                            style={{ fontFamily: "'Fredoka', ui-rounded, 'Segoe UI Rounded', sans-serif", fontWeight: 700 }}
-                        >
+                    {/* Nome + descrição, centralizados */}
+                    <div className="mb-6 text-center">
+                        <h2 className="text-white text-3xl font-bold leading-tight">
                             {produto.nome}
                         </h2>
-                        <p className="text-white/50 text-sm mt-2 leading-relaxed max-w-[38ch]">
+                        <p className="text-white/50 text-sm mt-3 leading-relaxed">
                             {produto.descricao}
                         </p>
                     </div>
 
-                    {/* Observação, estilo linha em vez de caixa */}
+                    {/* Observação como caixa */}
                     <div className="mb-6">
-                        <label className="text-white/70 text-sm font-medium block mb-2">
-                            Alguma observação?
+                        <label className="text-white text-base font-semibold block mb-2">
+                            Observações
                         </label>
                         <textarea
                             value={observacao}
                             onChange={(e) => setObservacao(e.target.value)}
-                            placeholder="Ex: sem chantilly, mais chocolate..."
+                            placeholder="Ex: Sem chantilly..."
                             className="
                                 w-full
-                                h-20
-                                bg-transparent
-                                border-b border-white/15
-                                py-2
+                                h-24
+                                bg-white/5
+                                rounded-2xl
+                                border border-white/10
+                                p-4
                                 resize-none
                                 outline-none
                                 text-white
                                 text-sm
-                                placeholder:text-white/25
+                                placeholder:text-white/30
                                 focus:border-[#a83bc2]
                                 transition-colors
                             "
@@ -113,23 +102,20 @@ export default function ModalMilkshake({
                     </div>
 
                     {/* Quantidade */}
-                    <div className="flex items-center justify-between mb-7">
-                        <span className="text-white/70 font-medium text-sm">
+                    <div className="flex items-center justify-between bg-white/5 rounded-2xl px-5 py-4 mb-6">
+                        <span className="text-white font-semibold text-base">
                             Quantidade
                         </span>
 
-                        <div className="flex items-center gap-5">
+                        <div className="flex items-center gap-4">
                             <button
                                 onClick={diminuir}
-                                className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/15 active:scale-90 text-white text-lg font-semibold transition"
+                                className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 active:scale-90 text-white text-lg font-semibold transition"
                             >
                                 −
                             </button>
 
-                            <span
-                                className="text-white w-6 text-center text-2xl tabular-nums"
-                                style={{ fontFamily: "'Fredoka', ui-rounded, sans-serif", fontWeight: 600 }}
-                            >
+                            <span className="text-white w-6 text-center text-xl font-bold tabular-nums">
                                 {quantidade}
                             </span>
 
@@ -142,7 +128,7 @@ export default function ModalMilkshake({
                         </div>
                     </div>
 
-                    {/* CTA em pílula sólida */}
+                    {/* CTA em pílula com gradiente */}
                     <button
                         onClick={() => {
                             adicionarAoCarrinho({
@@ -164,8 +150,10 @@ export default function ModalMilkshake({
                         }}
                         className="
                             w-full
-                            bg-[#8b2e9e]
-                            hover:bg-[#a83bc2]
+                            bg-gradient-to-r
+                            from-[#8b2e9e]
+                            to-[#a83bc2]
+                            hover:opacity-90
                             active:scale-[0.98]
                             transition-all
                             rounded-full
@@ -177,11 +165,10 @@ export default function ModalMilkshake({
                             cursor-pointer
                         "
                     >
-                        <span className="flex items-center gap-2 text-white font-semibold">
-                            <ShoppingBag size={18} />
-                            Adicionar
+                        <span className="text-white font-bold text-base">
+                            Adicionar ao Carrinho
                         </span>
-                        <span className="text-white font-bold">
+                        <span className="text-white font-bold text-base">
                             R$ {precoTotal.toFixed(2).replace(".", ",")}
                         </span>
                     </button>

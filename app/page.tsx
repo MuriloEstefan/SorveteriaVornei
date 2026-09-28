@@ -6,7 +6,7 @@ import Footer from "@/app/home/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[var(--cor-fundo)] text-white">
+    <main className="min-h-screen bg-[#0e0818] text-white">
       <Header />
       <div className="pt-[88px]">
         <Hero />

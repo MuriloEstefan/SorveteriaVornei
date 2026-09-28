@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
+import { exigirAdmin } from "@/lib/verificarAdmin";
 import {
     listarHistorico,
     buscarResumoHistorico,
 } from "@/app/admin/historico/services/historico";
 
 export async function GET(req: NextRequest) {
+    const erroAuth = await exigirAdmin();
+    if (erroAuth) return erroAuth;
+
     try {
         const { searchParams } = new URL(req.url);
         const busca = searchParams.get("busca") || undefined;

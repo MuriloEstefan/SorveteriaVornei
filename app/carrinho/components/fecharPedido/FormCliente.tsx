@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowLeft, ShieldCheck } from "lucide-react";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 type Props = {
     voltar: () => void;
@@ -23,6 +24,7 @@ export default function DadosCliente({ voltar, continuar }: Props) {
     const [telefone, setTelefone] = useState("");
     const [observacao, setObservacao] = useState("");
     const [colher, setColher] = useState(false);
+    const [aceitouPrivacidade, setAceitouPrivacidade] = useState(false);
 
     return (
         <div className="mt-5 space-y-4">
@@ -116,6 +118,25 @@ export default function DadosCliente({ voltar, continuar }: Props) {
                 </p>
             </div>
 
+            <label className="flex items-start gap-2 px-1 cursor-pointer">
+                <input
+                    type="checkbox"
+                    checked={aceitouPrivacidade}
+                    onChange={(e) => setAceitouPrivacidade(e.target.checked)}
+                    className="w-4 h-4 mt-0.5 shrink-0"
+                />
+                <span className="text-white/60 text-xs leading-relaxed">
+                    Li e concordo com a{" "}
+                    <Link
+                        href="/privacidade"
+                        target="_blank"
+                        className="text-[#6ddc8b] underline"
+                    >
+                        Política de Privacidade
+                    </Link>
+                </span>
+            </label>
+
             <button
                 onClick={() => {
 
@@ -126,6 +147,11 @@ export default function DadosCliente({ voltar, continuar }: Props) {
 
                     if (telefone.length < 10) {
                         toast.error("Informe um telefone válido");
+                        return;
+                    }
+
+                    if (!aceitouPrivacidade) {
+                        toast.error("Você precisa aceitar a Política de Privacidade para continuar");
                         return;
                     }
 

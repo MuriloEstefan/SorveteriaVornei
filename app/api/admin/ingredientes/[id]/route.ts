@@ -1,10 +1,14 @@
 import { NextResponse } from "next/server";
+import { exigirAdmin } from "@/lib/verificarAdmin";
 import { atualizarDisponibilidadeIngrediente } from "@/app/admin/ingredientes/services/ingredientes";
 
 export async function PATCH(
     req: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
+    const erroAuth = await exigirAdmin();
+    if (erroAuth) return erroAuth;
+
     try {
         const { id } = await params;
 
