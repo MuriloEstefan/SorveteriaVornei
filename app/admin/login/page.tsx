@@ -64,8 +64,7 @@ export default function LoginPage() {
                 return;
             }
 
-            router.push("/admin");
-            router.refresh();
+            window.location.href = "/admin";
         } catch {
             toast.error("Erro ao tentar fazer login. Tente novamente.");
             setCarregando(false);

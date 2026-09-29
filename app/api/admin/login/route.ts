@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     if (error) {
         await registrarTentativaFalha(ip);
         return NextResponse.json(
-            { erro: "E-mail ou senha incorretos" },
+            { erro: "Senha incorreta" },
             { status: 401 }
         );
     }
