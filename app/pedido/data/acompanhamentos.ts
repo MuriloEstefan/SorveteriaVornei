@@ -1,5 +1,5 @@
 export const acompanhamentos = [
-        "Creme de Avelã", "Creme de Leite Ninho", "Chocolate Trufado Branco", "Chocolate Trufado ao Leite", "Chocowafer Branco", "Chocowafer ao Leite",
+        "Creme de Avelã", "Creme de Leite Ninho", "Chocolate Trufado Branco", "Chocolate Trufado ao Leite", "Chocolate Meio Amargo", "Chocowafer Branco", "Chocowafer ao Leite",
         "Creme de Coco Branco", "Creme de Kinder Bueno", "Creme de Pistache", "Creme de Paçoca", "Creme de Ovomaltine", "Creme Sonho de Valsa",
         "Creme de Ferrero Rocher", "Creme de Brownie", "Creme Cookies Branco", "Creme de Morango", "Creme de Maracujá", "Creme de Abacaxi ao Vinho",
         "Leite Condensado", "Beijinho", "Brigadeiro Tradicional", "Brigadeiro de Churros", "Brigadeiro de Morango com Ninho", "Brigadeiro de Pistache",
