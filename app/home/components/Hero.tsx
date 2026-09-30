@@ -27,10 +27,10 @@ export default function Hero() {
                         Sorveteria & Milkshakeria
                     </span>
 
-                    <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.05] tracking-tight">
-                        Sabores que<br />
-                        <span className="text-[#6ddc8b]">marcam</span><br />
-                        memórias
+                    <h1 className="text-4xl md:text-7xl font-black text-white leading-[1.05] tracking-tight">
+                        Sorvete cremoso,<br />
+                        <span className="text-[#6ddc8b]">açaí premium,</span><br />
+                        milkshake de verdade
                     </h1>
 
                     <p className="text-white/50 text-base md:text-lg max-w-sm leading-relaxed">

@@ -9,7 +9,7 @@ export function abrirWhatsApp(dados: PedidoCompleto) {
 
     const frete = dados.total - subtotalPedido;
 
-    const numero = "5519996865599"; // 55 + DDD + número
+    const numero = "5519989705363"; // 55 + DDD + número
 
     // Monta os itens do carrinho
     const itens = dados.pedidos.map((item) => {

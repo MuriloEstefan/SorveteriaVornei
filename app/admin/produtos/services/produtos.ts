@@ -6,7 +6,7 @@ export async function listarProdutos(): Promise<ProdutoAdmin[]> {
         SELECT id, categoria, nome, descricao, imagem, preco,
                max_sabores, max_acompanhamentos, disponivel, ativo, criado_em
         FROM produtos
-        ORDER BY categoria, nome
+        ORDER BY categoria, ordem ASC
     `);
 
     return resultado.rows.map((produto) => ({

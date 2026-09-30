@@ -43,6 +43,10 @@ export default function Localizacao() {
                     Conheça nossa primeira unidade
                 </p>
 
+                <p className="text-[#6ddc8b] text-sm italic">
+                    Qualidade e tradição desde 1991
+                </p>
+
                 <Link
                     href="https://www.instagram.com/vornei.lanches/"
                     target="_blank"
