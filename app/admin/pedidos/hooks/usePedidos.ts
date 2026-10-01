@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { PedidoBanco } from "@/types/pedidos";
 
 const STATUS_ATIVOS = ["recebido", "em_preparo", "saiu_entrega"];
@@ -23,12 +23,19 @@ function montarMensagem(novoStatus: string, tipoEntrega: string): string | null 
 export function usePedidos() {
 
     const [pedidos, setPedidos] = useState<PedidoBanco[]>([]);
+    const idsConhecidos = useRef<Set<string>>(new Set());
+    const primeiraCarga = useRef(true);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
 
     const proximoStatus: Record<string, string> = {
         recebido: "em_preparo",
         em_preparo: "saiu_entrega",
         saiu_entrega: "entregue",
     };
+
+    useEffect(() => {
+        audioRef.current = new Audio("/sons/notificacao.mp3");
+    }, []);
 
     const buscarPedidos = async () => {
         const resposta = await fetch("/api/admin/pedidos");
@@ -37,6 +44,28 @@ export function usePedidos() {
         const pedidosAtivos = dados.filter((p: PedidoBanco) =>
             STATUS_ATIVOS.includes(p.status)
         );
+
+        const idsAtuais = pedidosAtivos.map((p: PedidoBanco) => p.id);
+        const temPedidoNovo = idsAtuais.some(
+            (id: string) => !idsConhecidos.current.has(id)
+        );
+
+        console.log("DEBUG:", {
+            idsAtuais,
+            idsConhecidosAntes: Array.from(idsConhecidos.current),
+            temPedidoNovo,
+            primeiraCarga: primeiraCarga.current,
+        });
+
+        if (temPedidoNovo && !primeiraCarga.current) {
+            console.log("Tentando tocar som...");
+            audioRef.current?.play()
+                .then(() => console.log("Som tocou!"))
+                .catch((err) => console.log("Som bloqueado:", err));
+        }
+
+        idsConhecidos.current = new Set(idsAtuais);
+        primeiraCarga.current = false;
 
         setPedidos(pedidosAtivos);
     };
@@ -99,7 +128,7 @@ export function usePedidos() {
         pedidos,
         avancarStatus,
         cancelarPedido,
-        marcarPago, 
+        marcarPago,
         proximoStatus
     };
 }
