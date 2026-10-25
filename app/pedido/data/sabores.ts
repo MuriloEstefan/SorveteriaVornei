@@ -4,5 +4,10 @@ export const sabores = [
         "Sorvete Oreo", "Sorvete Mousse de Maracujá", "Sorvete Ferrero Rocher", "Sorvete Pistache", "Sorvete Flocos",
         "Sorvete Café com Cacau", "Sorvete Rafaello(coco)", "Sorvete Chocomenta", "Sorvete Yogurte com Frutas Vermelhas",
         "Sorvete Mousse de Abacaxi", "Sorvete Ovomaltine", "Sorvete Charge", "Sorvete Chocolate Belga", "Sorvete Bombom",
-        "Sorvete Unicórnio", "Sorvete Doce de Leite Argentino", "Sorvete Laka com Nutella"
+        "Sorvete Unicórnio", "Sorvete Doce de Leite Argentino", "Sorvete Laka com Nutella", "Sorvete Yogurte com Morango"
 ]
+
+export const lancamentos = [
+    "Sorvete Laka com Nutella",
+    "Sorvete Yogurte com Morango",
+];

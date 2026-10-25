@@ -3,6 +3,7 @@ import ItemQuantidade from "../../../components/ItemQuantidade";
 interface ListaItensProps {
     titulo: string;
     lista: string[];
+    lancamentos?: string[];
     tipo: "sorvete" | "acompanhamento";
     quantidades: Record<string, number>;
     maxItens: number;
@@ -14,6 +15,7 @@ interface ListaItensProps {
 export default function ListaItens({
     titulo,
     lista,
+    lancamentos = [],
     tipo,
     quantidades,
     maxItens,
@@ -46,6 +48,7 @@ export default function ListaItens({
                     tipo={tipo}
                     podeAumentar={podeAumentar}
                     disponivel={disponibilidadePorNome[item] ?? true} // 👈 assume disponível se não achar (fallback seguro)
+                    lancamento={lancamentos.includes(item)}
                     aumentar={aumentar}
                     diminuir={diminuir}
                 />

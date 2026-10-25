@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ArrowLeft, ShoppingBag } from "lucide-react";
 import { Props } from "@/types/pedidos";
 import { toast } from "react-toastify";
-import { sabores } from "../../data/sabores";
+import { sabores, lancamentos  } from "../../data/sabores";
 import { acompanhamentos } from "../../data/acompanhamentos";
 import ListaItens from "../ListaItens";
 import { useMontagemPedido } from "../../hooks/useMontagemPedido";
@@ -120,6 +120,7 @@ export default function ModalSorveteAcai({pedido, fechar, adicionarAoCarrinho}: 
                     titulo="Sabores"
                     lista={sabores}
                     tipo="sorvete"
+                    lancamentos={lancamentos}
                     quantidades={quantidades}
                     maxItens={pedido.maxSabores}
                     disponibilidadePorNome={disponibilidadePorNome}
